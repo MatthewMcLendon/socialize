@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Card from "../style/card";
+import { UserContext } from "./UserProvider";
 import "./UserForm.css";
 
 export default function UserForm() {
   const [isSignup, setIsSignup] = useState(false);
 
+  const { addUser } = useContext(UserContext);
+
   const submitHandler = (event) => {
     event.preventDefault();
 
-    console.log(event);
-    const data = getFormData();
-    console.log(data);
+    const formData = getFormData();
+
+    if (isSignup) {
+      addUser(formData);
+    }
 
     clearFormData();
   };
