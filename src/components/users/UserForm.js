@@ -37,6 +37,7 @@ export default function UserForm() {
     } else {
       email = null;
     }
+
     return {
       username: document.querySelector("#username").value,
       password: document.querySelector("#password").value,
@@ -47,6 +48,7 @@ export default function UserForm() {
   const clearFormData = () => {
     document.querySelector("#username").value = "";
     document.querySelector("#password").value = "";
+
     if (isSignup) {
       document.querySelector("#email").value = "";
     }

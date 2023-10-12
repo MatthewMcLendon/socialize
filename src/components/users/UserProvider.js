@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext();
 
 export default function UserProvider(props) {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState();
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -12,7 +12,7 @@ export default function UserProvider(props) {
   }, []);
 
   const logInUser = (user) => {
-    localStorage.setItem("user", user.id);
+    localStorage.setItem("user", user);
     setUser(user);
   };
 
@@ -26,8 +26,14 @@ export default function UserProvider(props) {
     }).then(logInUser(user));
   };
 
+  const getUsers = () => {
+    return fetch("http://localhost:8088/users").then(
+      (response) => response.json
+    );
+  };
+
   return (
-    <UserContext.Provider value={{ user, addUser }}>
+    <UserContext.Provider value={{ user, addUser, getUsers }}>
       {props.children}
     </UserContext.Provider>
   );
