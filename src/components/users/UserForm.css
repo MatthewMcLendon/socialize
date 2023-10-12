@@ -1,7 +1,6 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 20%;
   margin: auto;
 }
 
@@ -18,18 +17,19 @@ button {
   background-color: greenyellow;
 }
 
-#signup-button {
+#signup-button #cancel-button {
   display: flex;
-  width: 20%;
   margin: auto;
+}
+
+#signup-button {
   background-color: blue;
   color: white;
+  width: 100%;
 }
 
 #cancel-button {
-  display: flex;
-  width: 20%;
-  margin: auto;
   background-color: red;
   color: white;
+  width: 100%;
 }
