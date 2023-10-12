@@ -1,0 +1,74 @@
+import { useState } from "react";
+import "./UserForm.css";
+
+export default function UserForm() {
+  const [isSignup, setIsSignup] = useState(false);
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    console.log(event);
+    const data = getFormData();
+    console.log(data);
+  };
+
+  const signupHandler = () => {
+    setIsSignup(true);
+  };
+
+  const cancelHandler = () => {
+    setIsSignup(false);
+  };
+
+  const getFormData = () => {
+    let email;
+
+    if (isSignup) {
+      email = document.querySelector("#email").value;
+    } else {
+      email = null;
+    }
+    return {
+      username: document.querySelector("#username").value,
+      password: document.querySelector("#password").value,
+      email: email,
+    };
+  };
+
+  const clearFormData = () => {
+    document.querySelector("#username").value = "";
+    document.querySelector("#password").value = "";
+    if (isSignup) {
+      document.querySelector("#email").value = "";
+    }
+
+    setIsSignup(false);
+  };
+
+  return (
+    <>
+      <form id="user-form" onSubmit={submitHandler}>
+        <input type="hidden" />
+        <input type="text" placeholder="Username" id="username" required />
+        <input type="text" placeholder="Password" id="password" required />
+        {isSignup ? (
+          <>
+            <input type="email" placeholder="Email" id="email" required />
+            <button id="login-button">Register</button>
+          </>
+        ) : (
+          <button id="login-button">Log in</button>
+        )}
+      </form>
+      {isSignup ? (
+        <button id="cancel-button" onClick={cancelHandler}>
+          Cancel
+        </button>
+      ) : (
+        <button id="signup-button" onClick={signupHandler}>
+          Sign Up
+        </button>
+      )}
+    </>
+  );
+}
