@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Card from "../style/card";
 import "./UserForm.css";
 
 export default function UserForm() {
@@ -10,6 +11,8 @@ export default function UserForm() {
     console.log(event);
     const data = getFormData();
     console.log(data);
+
+    clearFormData();
   };
 
   const signupHandler = () => {
@@ -46,7 +49,7 @@ export default function UserForm() {
   };
 
   return (
-    <>
+    <Card>
       <form id="user-form" onSubmit={submitHandler}>
         <input type="hidden" />
         <input type="text" placeholder="Username" id="username" required />
@@ -69,6 +72,6 @@ export default function UserForm() {
           Sign Up
         </button>
       )}
-    </>
+    </Card>
   );
 }

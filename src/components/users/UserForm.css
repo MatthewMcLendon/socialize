@@ -1,0 +1,35 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: auto;
+}
+
+input {
+  margin: 10px 0;
+}
+
+button {
+  margin: 10px 0;
+  border-radius: 0.75rem;
+}
+
+#login-button {
+  background-color: greenyellow;
+}
+
+#signup-button {
+  display: flex;
+  width: 20%;
+  margin: auto;
+  background-color: blue;
+  color: white;
+}
+
+#cancel-button {
+  display: flex;
+  width: 20%;
+  margin: auto;
+  background-color: red;
+  color: white;
+}
