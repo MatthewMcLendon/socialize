@@ -14,6 +14,7 @@ export default function UserForm() {
     const formData = getFormData();
 
     if (isSignup) {
+      // add additional user properties here to save to database. post array, thread array, etc.
       addUser(formData);
     }
 
