@@ -33,7 +33,7 @@ export default function UserProvider(props) {
   };
 
   return (
-    <UserContext.Provider value={{ user, addUser, getUsers }}>
+    <UserContext.Provider value={{ user, addUser, getUsers, logInUser }}>
       {props.children}
     </UserContext.Provider>
   );

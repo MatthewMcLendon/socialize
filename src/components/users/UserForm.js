@@ -1,10 +1,10 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import Card from "../style/card";
 import { UserContext } from "./UserProvider";
 import "./UserForm.css";
 
 export default function UserForm() {
-  const { addUser, getUsers } = useContext(UserContext);
+  const { addUser, getUsers, logInUser } = useContext(UserContext);
 
   const [isSignup, setIsSignup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -23,6 +23,21 @@ export default function UserForm() {
         : duplicateUserCheck(formData, users)
         ? setErrorMessage("Username taken. Please select another.")
         : addUser(formData).then(clearFormData);
+
+      return;
+    }
+
+    let user = users.find(
+      (existingUser) =>
+        existingUser.username === formData.username &&
+        existingUser.password === formData.password
+    );
+
+    if (user) {
+      logInUser(user);
+      clearFormData();
+    } else {
+      setErrorMessage("Username of Password incorrect. Please try again.");
     }
   };
 
