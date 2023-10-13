@@ -2,12 +2,15 @@ import { useState, useContext } from "react";
 import Card from "../style/card";
 import { UserContext } from "./UserProvider";
 import "./UserForm.css";
+import { useNavigate } from "react-router-dom";
 
 export default function UserForm() {
   const { addUser, getUsers, logInUser } = useContext(UserContext);
 
   const [isSignup, setIsSignup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -22,7 +25,7 @@ export default function UserForm() {
         ? setErrorMessage("Email already in use.")
         : duplicateUserCheck(formData, users)
         ? setErrorMessage("Username taken. Please select another.")
-        : addUser(formData).then(clearFormData);
+        : addUser(formData).then(clearFormData).then(navigate("/home"));
 
       return;
     }
@@ -36,6 +39,7 @@ export default function UserForm() {
     if (user) {
       logInUser(user);
       clearFormData();
+      navigate("/home");
     } else {
       setErrorMessage("Username of Password incorrect. Please try again.");
     }
