@@ -9,26 +9,21 @@ export default function UserForm() {
   const [isSignup, setIsSignup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
+    let users = await getUsers();
     const formData = getFormData();
 
     if (isSignup) {
       // add additional user properties here to save to database. post array, thread array, etc.
 
-      if (duplicateUserCheck) {
-        console.log("duplicate");
-        setErrorMessage(
-          "Sorry, that username is taken. Please select another."
-        );
-        return;
-      }
-
-      // addUser(formData);
+      duplicateEmailCheck(formData, users)
+        ? setErrorMessage("Email already in use.")
+        : duplicateUserCheck(formData, users)
+        ? setErrorMessage("Username taken. Please select another.")
+        : addUser(formData).then(clearFormData);
     }
-
-    clearFormData();
   };
 
   const signupHandler = () => {
@@ -39,9 +34,17 @@ export default function UserForm() {
     setIsSignup(false);
   };
 
-  const duplicateUserCheck = async (user) => {
+  const duplicateEmailCheck = (user, users) => {
     let check;
-    let users = await getUsers();
+
+    users.find((existingUser) => existingUser.email === user.email)
+      ? (check = true)
+      : (check = false);
+    return check;
+  };
+
+  const duplicateUserCheck = (user, users) => {
+    let check;
 
     users.find((existingUser) => existingUser.username === user.username)
       ? (check = true)
@@ -75,6 +78,7 @@ export default function UserForm() {
     }
 
     setIsSignup(false);
+    setErrorMessage();
   };
 
   return (
@@ -82,7 +86,7 @@ export default function UserForm() {
       <form id="user-form" onSubmit={submitHandler}>
         <input type="hidden" />
         <input type="text" placeholder="Username" id="username" required />
-        <input type="text" placeholder="Password" id="password" required />
+        <input type="password" placeholder="Password" id="password" required />
         {isSignup ? (
           <>
             <input type="email" placeholder="Email" id="email" required />
