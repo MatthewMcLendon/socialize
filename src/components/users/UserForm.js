@@ -1,12 +1,13 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Card from "../style/card";
 import { UserContext } from "./UserProvider";
 import "./UserForm.css";
 
 export default function UserForm() {
-  const [isSignup, setIsSignup] = useState(false);
+  const { addUser, getUsers } = useContext(UserContext);
 
-  const { addUser } = useContext(UserContext);
+  const [isSignup, setIsSignup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -15,7 +16,16 @@ export default function UserForm() {
 
     if (isSignup) {
       // add additional user properties here to save to database. post array, thread array, etc.
-      addUser(formData);
+
+      if (duplicateUserCheck) {
+        console.log("duplicate");
+        setErrorMessage(
+          "Sorry, that username is taken. Please select another."
+        );
+        return;
+      }
+
+      // addUser(formData);
     }
 
     clearFormData();
@@ -27,6 +37,17 @@ export default function UserForm() {
 
   const cancelHandler = () => {
     setIsSignup(false);
+  };
+
+  const duplicateUserCheck = async (user) => {
+    let check;
+    let users = await getUsers();
+
+    users.find((existingUser) => existingUser.username === user.username)
+      ? (check = true)
+      : (check = false);
+
+    return check;
   };
 
   const getFormData = () => {
@@ -80,6 +101,7 @@ export default function UserForm() {
           Sign Up
         </button>
       )}
+      {errorMessage ? <p>{errorMessage}</p> : null}
     </Card>
   );
 }

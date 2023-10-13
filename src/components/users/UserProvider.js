@@ -6,13 +6,13 @@ export default function UserProvider(props) {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setUser(localStorage.getItem("user"));
-    }
+    // if (localStorage.getItem("user")) {
+    //   users.find((user) => user.username === localStorage.getItem("user"));
+    // }
   }, []);
 
   const logInUser = (user) => {
-    localStorage.setItem("user", user);
+    localStorage.setItem("user", user.username);
     setUser(user);
   };
 
@@ -27,8 +27,8 @@ export default function UserProvider(props) {
   };
 
   const getUsers = () => {
-    return fetch("http://localhost:8088/users").then(
-      (response) => response.json
+    return fetch("http://localhost:8088/users").then((response) =>
+      response.json()
     );
   };
 
