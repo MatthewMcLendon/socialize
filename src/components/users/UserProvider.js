@@ -16,6 +16,11 @@ export default function UserProvider(props) {
     setUser(user);
   };
 
+  const logOutUser = () => {
+    localStorage.clear();
+    setUser();
+  };
+
   const addUser = (user) => {
     return fetch("http://localhost:8088/users", {
       method: "POST",
@@ -33,7 +38,9 @@ export default function UserProvider(props) {
   };
 
   return (
-    <UserContext.Provider value={{ user, addUser, getUsers, logInUser }}>
+    <UserContext.Provider
+      value={{ user, addUser, getUsers, logInUser, logOutUser }}
+    >
       {props.children}
     </UserContext.Provider>
   );
