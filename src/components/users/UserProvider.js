@@ -35,6 +35,12 @@ export default function UserProvider(props) {
     }).then(logInUser(user));
   };
 
+  const deleteUser = (user) => {
+    return fetch(`http://localhost:8088/users/${user.id}`, {
+      method: "DELETE",
+    }).then(logOutUser);
+  };
+
   const getUsers = () => {
     return fetch("http://localhost:8088/users").then((response) =>
       response.json()
@@ -43,7 +49,7 @@ export default function UserProvider(props) {
 
   return (
     <UserContext.Provider
-      value={{ user, addUser, getUsers, logInUser, logOutUser }}
+      value={{ user, addUser, getUsers, logInUser, logOutUser, deleteUser }}
     >
       {props.children}
     </UserContext.Provider>
