@@ -1,13 +1,10 @@
 import "./Navbar.css";
 import { UserContext } from "../users/UserProvider";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const { user, logOutUser } = useContext(UserContext);
-
-  const loginHandler = () => {
-    console.log("Navigate to userForm page");
-  };
 
   const logoutHandler = () => {
     logOutUser();
@@ -20,8 +17,8 @@ export default function Navbar() {
           Logout
         </button>
       ) : (
-        <button id="login/register-button" onClick={loginHandler}>
-          Login / Register
+        <button id="login/register-button">
+          <Link to={"/login"}>Login / Register</Link>
         </button>
       )}
     </div>
