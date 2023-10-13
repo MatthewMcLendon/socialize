@@ -13,7 +13,7 @@ export default function Navbar() {
   const links = user ? (
     <ul className="links-list">
       <li>
-        <Link to={"/home"}>Home</Link>
+        <Link to={"/"}>Home</Link>
       </li>
       <li>
         <Link to={"/subscriptions"}>Subscriptions</Link>
@@ -24,7 +24,7 @@ export default function Navbar() {
     </ul>
   ) : (
     <ul>
-      <Link to={"/home"}>Home</Link>
+      <Link to={"/"}>Home</Link>
     </ul>
   );
 
