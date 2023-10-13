@@ -25,7 +25,7 @@ export default function UserForm() {
         ? setErrorMessage("Email already in use.")
         : duplicateUserCheck(formData, users)
         ? setErrorMessage("Username taken. Please select another.")
-        : addUser(formData).then(clearFormData).then(navigate("/home"));
+        : addUser(formData).then(clearFormData).then(navigate("/"));
 
       return;
     }
@@ -39,7 +39,7 @@ export default function UserForm() {
     if (user) {
       logInUser(user);
       clearFormData();
-      navigate("/home");
+      navigate("/");
     } else {
       setErrorMessage("Username of Password incorrect. Please try again.");
     }

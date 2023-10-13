@@ -1,9 +1,12 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
 export default function UserProvider(props) {
   const [user, setUser] = useState();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // if (localStorage.getItem("user")) {
@@ -19,6 +22,7 @@ export default function UserProvider(props) {
   const logOutUser = () => {
     localStorage.clear();
     setUser();
+    navigate("/");
   };
 
   const addUser = (user) => {
