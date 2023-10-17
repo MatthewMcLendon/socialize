@@ -1,6 +1,7 @@
 import "./UserSettings.css";
 import { useContext, useState } from "react";
 import { UserContext } from "./UserProvider";
+import Card from "../style/card";
 
 export default function UserSettings() {
   const { user, deleteUser } = useContext(UserContext);
@@ -19,10 +20,10 @@ export default function UserSettings() {
   };
 
   const settings = (
-    <>
+    <Card>
       <button onClick={hideSettings}>X</button>
       <button onClick={deleteUserHandler}>Delete account</button>
-    </>
+    </Card>
   );
 
   return (

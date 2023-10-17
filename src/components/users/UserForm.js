@@ -98,29 +98,36 @@ export default function UserForm() {
 
   return (
     <Card>
-      <form id="user-form" onSubmit={submitHandler}>
-        <input type="hidden" />
-        <input type="text" placeholder="Username" id="username" required />
-        <input type="password" placeholder="Password" id="password" required />
+      <div className="form-container">
+        <form id="user-form" onSubmit={submitHandler}>
+          <input type="hidden" />
+          <input type="text" placeholder="Username" id="username" required />
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            required
+          />
+          {isSignup ? (
+            <>
+              <input type="email" placeholder="Email" id="email" required />
+              <button id="login-button">Register</button>
+            </>
+          ) : (
+            <button id="login-button">Log in</button>
+          )}
+        </form>
         {isSignup ? (
-          <>
-            <input type="email" placeholder="Email" id="email" required />
-            <button id="login-button">Register</button>
-          </>
+          <button id="cancel-button" onClick={cancelHandler}>
+            Cancel
+          </button>
         ) : (
-          <button id="login-button">Log in</button>
+          <button id="signup-button" onClick={signupHandler}>
+            Sign Up
+          </button>
         )}
-      </form>
-      {isSignup ? (
-        <button id="cancel-button" onClick={cancelHandler}>
-          Cancel
-        </button>
-      ) : (
-        <button id="signup-button" onClick={signupHandler}>
-          Sign Up
-        </button>
-      )}
-      {errorMessage ? <p>{errorMessage}</p> : null}
+        {errorMessage ? <p>{errorMessage}</p> : null}
+      </div>
     </Card>
   );
 }
