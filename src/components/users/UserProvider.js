@@ -48,6 +48,16 @@ export default function UserProvider(props) {
     }).then(logOutUser);
   };
 
+  const updateUser = (user) => {
+    return fetch(`http://localhost:8088/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }).then((response) => logInUser(response));
+  };
+
   const getUsers = () => {
     return fetch("http://localhost:8088/users")
       .then((response) => response.json())
@@ -56,7 +66,15 @@ export default function UserProvider(props) {
 
   return (
     <UserContext.Provider
-      value={{ user, users, addUser, logInUser, logOutUser, deleteUser }}
+      value={{
+        user,
+        users,
+        addUser,
+        logInUser,
+        logOutUser,
+        deleteUser,
+        updateUser,
+      }}
     >
       {props.children}
     </UserContext.Provider>
