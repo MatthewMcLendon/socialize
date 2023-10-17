@@ -11,12 +11,6 @@
       "password": "test",
       "email": "test@gmail.com",
       "id": 3
-    },
-    {
-      "username": "test3",
-      "password": "test3",
-      "email": "test3@test.com",
-      "id": 4
     }
   ],
   "threads": [],

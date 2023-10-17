@@ -14,10 +14,14 @@ export default function UserSettings() {
     setVisible(false);
   };
 
+  const deleteUserHandler = () => {
+    deleteUser(user);
+  };
+
   const settings = (
     <>
       <button onClick={hideSettings}>X</button>
-      <button onClick={deleteUser}>Delete account</button>
+      <button onClick={deleteUserHandler}>Delete account</button>
     </>
   );
 
