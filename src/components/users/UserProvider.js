@@ -5,17 +5,24 @@ export const UserContext = createContext();
 
 export default function UserProvider(props) {
   const [user, setUser] = useState();
+  const [users, setUsers] = useState();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (localStorage.getItem("user")) {
-    //   users.find((user) => user.username === localStorage.getItem("user"));
-    // }
+    getUsers();
+    returningUserCheck();
   }, []);
 
+  const returningUserCheck = () => {
+    const returningUser = JSON.parse(localStorage.getItem("user"));
+    if (returningUser) {
+      setUser(returningUser);
+    }
+  };
+
   const logInUser = (user) => {
-    localStorage.setItem("user", user.username);
+    localStorage.setItem("user", JSON.stringify(user));
     setUser(user);
   };
 
@@ -42,14 +49,14 @@ export default function UserProvider(props) {
   };
 
   const getUsers = () => {
-    return fetch("http://localhost:8088/users").then((response) =>
-      response.json()
-    );
+    return fetch("http://localhost:8088/users")
+      .then((response) => response.json())
+      .then((response) => setUsers(response));
   };
 
   return (
     <UserContext.Provider
-      value={{ user, addUser, getUsers, logInUser, logOutUser, deleteUser }}
+      value={{ user, users, addUser, logInUser, logOutUser, deleteUser }}
     >
       {props.children}
     </UserContext.Provider>

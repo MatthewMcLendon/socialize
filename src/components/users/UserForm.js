@@ -5,22 +5,18 @@ import "./UserForm.css";
 import { useNavigate } from "react-router-dom";
 
 export default function UserForm() {
-  const { addUser, getUsers, logInUser } = useContext(UserContext);
+  const { addUser, logInUser, users } = useContext(UserContext);
 
   const [isSignup, setIsSignup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
-  const submitHandler = async (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
-
-    let users = await getUsers();
     const formData = getFormData();
 
     if (isSignup) {
-      // add additional user properties here to save to database. post array, thread array, etc.
-
       duplicateEmailCheck(formData, users)
         ? setErrorMessage("Email already in use.")
         : duplicateUserCheck(formData, users)

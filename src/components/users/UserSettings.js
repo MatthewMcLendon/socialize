@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "./UserProvider";
 
 export default function UserSettings() {
-  const { user } = useContext(UserContext);
+  const { user, deleteUser } = useContext(UserContext);
   const [visible, setVisible] = useState(false);
 
   const showSettings = () => {
@@ -17,6 +17,7 @@ export default function UserSettings() {
   const settings = (
     <>
       <button onClick={hideSettings}>X</button>
+      <button onClick={deleteUser}>Delete account</button>
     </>
   );
 

@@ -7,12 +7,6 @@
       "id": 1
     },
     {
-      "username": "test",
-      "password": "test",
-      "email": "test@test.com",
-      "id": 2
-    },
-    {
       "username": "test2",
       "password": "test",
       "email": "test@gmail.com",
