@@ -55,7 +55,9 @@ export default function UserProvider(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
-    }).then((response) => logInUser(response));
+    })
+      .then((response) => logInUser(user))
+      .then(getUsers);
   };
 
   const getUsers = () => {
