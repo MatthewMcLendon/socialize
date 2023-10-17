@@ -21,8 +21,10 @@ export default function UserSettings() {
 
   const settings = (
     <Card>
-      <button onClick={hideSettings}>X</button>
-      <button onClick={deleteUserHandler}>Delete account</button>
+      <div className="settings-container">
+        <button id="close-button" onClick={hideSettings}>X</button>
+        <button onClick={deleteUserHandler}>Delete account</button>
+      </div>
     </Card>
   );
 
