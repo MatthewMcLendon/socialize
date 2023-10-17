@@ -56,7 +56,7 @@ export default function UserProvider(props) {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => logInUser(user))
+      .then(() => logInUser(user))
       .then(getUsers);
   };
 

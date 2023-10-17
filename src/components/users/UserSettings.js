@@ -12,10 +12,7 @@ export default function UserSettings() {
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false);
 
-  // const [username, setUsername] = useState();
-  // const [password, setPassword] = useState();
-  // const [email, setEmail] = useState();
-  // const [message, setMessage] = useState();
+  const [message, setMessage] = useState();
 
   const updateUserHandler = (event) => {
     event.preventDefault();
@@ -23,6 +20,7 @@ export default function UserSettings() {
     const formData = getFormData();
     formData.id = user.id;
     updateUser(formData);
+    setMessage("Account information updated!");
 
     resetForm();
   };
@@ -149,6 +147,7 @@ export default function UserSettings() {
   return (
     <>
       {user ? <button onClick={showSettings}>Settings</button> : null}
+      {message ? <p>{message}</p> : null}
       {isVisible ? settings : null}
       {isUpdating ? updateForm : null}
     </>

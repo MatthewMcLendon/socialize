@@ -1,9 +1,9 @@
 {
   "users": [
     {
-      "username": "test_updated",
+      "username": "test",
       "password": "test",
-      "email": "test@test.com",
+      "email": "test@testupdated.com",
       "id": 1
     },
     {

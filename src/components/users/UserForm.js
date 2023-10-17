@@ -1,14 +1,14 @@
-import { useState, useContext } from "react";
-import Card from "../style/card";
-import { UserContext } from "./UserProvider";
 import "./UserForm.css";
+import { useState, useContext } from "react";
+import { UserContext } from "./UserProvider";
 import { useNavigate } from "react-router-dom";
+import Card from "../style/card";
 
 export default function UserForm() {
   const { addUser, logInUser, users } = useContext(UserContext);
 
   const [isSignup, setIsSignup] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState();
 
   const navigate = useNavigate();
 
@@ -101,20 +101,37 @@ export default function UserForm() {
       <div className="form-container">
         <form id="user-form" onSubmit={submitHandler}>
           <input type="hidden" />
-          <input type="text" placeholder="Username" id="username" required />
+          <input
+            type="text"
+            placeholder="Username"
+            id="username"
+            name="username"
+            required
+          />
           <input
             type="password"
             placeholder="Password"
             id="password"
+            name="password"
             required
           />
           {isSignup ? (
             <>
-              <input type="email" placeholder="Email" id="email" required />
-              <button id="login-button">Register</button>
+              <input
+                type="email"
+                placeholder="Email"
+                id="email"
+                name="email"
+                required
+              />
+              <button type="submit" id="login-button">
+                Register
+              </button>
             </>
           ) : (
-            <button id="login-button">Log in</button>
+            <button type="submit" id="login-button">
+              Log in
+            </button>
           )}
         </form>
         {isSignup ? (
