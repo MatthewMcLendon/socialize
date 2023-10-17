@@ -8,9 +8,29 @@ export default function UserSettings() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isUpdatingUsername, setIsUpdatingUsername] = useState(false);
+  const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
+  const [isUpdatingEmail, setIsUpdatingEmail] = useState(false);
+
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
+  const [message, setMessage] = useState();
 
   const showSettings = () => {
     setIsVisible(true);
+  };
+
+  const showUsername = () => {
+    setIsUpdatingUsername(true);
+  };
+
+  const showPassword = () => {
+    setIsUpdatingPassword(true);
+  };
+
+  const showEmail = () => {
+    setIsUpdatingEmail(true);
   };
 
   const hideSettings = () => {
@@ -32,27 +52,52 @@ export default function UserSettings() {
     setIsUpdating(false);
   };
 
+  // const getFormData = () => {
+  //   const data = {
+  //     username: document.querySelector("#username").value,
+  //     password: document.querySelector("#password").value,
+  //     email: document.querySelector("#email").value,
+  //   };
+
+  //   return data;
+  // };
+
   const settings = (
     <Card>
       <div className="settings-container">
         <button id="close-button" onClick={hideSettings}>
           X
         </button>
-        <button onClick={deleteUserHandler}>Delete account</button>
-        <button onClick={showUpdateFormHandler}>
-          Update account information
-        </button>
+        <button onClick={deleteUserHandler}>Delete Account</button>
+        <button onClick={showUpdateFormHandler}>Account Settings</button>
       </div>
     </Card>
   );
 
   const updateForm = (
     <Card>
-      <form className="userUpdate-form">
-        <input type="text" placeholder="New username" />
-        <input type="password" placeholder="New password" />
-        <input type="email" placeholder="New email" />
-        <button onClick={updateUserHandler}>Submit</button>
+      <>
+        {isUpdatingUsername ? null : (
+          <button onClick={showUsername}>Change Username</button>
+        )}
+        {isUpdatingPassword ? null : (
+          <button onClick={showPassword}>Change Password</button>
+        )}
+        {isUpdatingEmail ? null : (
+          <button onClick={showEmail}>Change Email</button>
+        )}
+      </>
+      <form className="userUpdate-form" onClick={updateUserHandler}>
+        {isUpdatingUsername ? (
+          <input type="text" id="username" placeholder="New username" />
+        ) : null}
+        {isUpdatingPassword ? (
+          <input type="password" id="password" placeholder="New password" />
+        ) : null}
+        {isUpdatingEmail ? (
+          <input type="email" id="email" placeholder="New email" />
+        ) : null}
+        <button>Submit</button>
       </form>
     </Card>
   );
