@@ -4,7 +4,7 @@ import { UserContext } from "./UserProvider";
 import Card from "../style/card";
 
 export default function UserSettings() {
-  const { user, deleteUser } = useContext(UserContext);
+  const { user, deleteUser, updateUser } = useContext(UserContext);
 
   const [isVisible, setIsVisible] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -12,10 +12,24 @@ export default function UserSettings() {
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false);
 
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [message, setMessage] = useState();
+  // const [username, setUsername] = useState();
+  // const [password, setPassword] = useState();
+  // const [email, setEmail] = useState();
+  // const [message, setMessage] = useState();
+
+  const updateUserHandler = (event) => {
+    event.preventDefault();
+
+    const formData = getFormData();
+    formData.id = user.id;
+    updateUser(formData);
+
+    resetForm();
+  };
+
+  const deleteUserHandler = () => {
+    deleteUser(user);
+  };
 
   const showSettings = () => {
     setIsVisible(true);
@@ -37,30 +51,43 @@ export default function UserSettings() {
     setIsVisible(false);
   };
 
-  const deleteUserHandler = () => {
-    deleteUser(user);
-  };
-
   const showUpdateFormHandler = () => {
     setIsVisible(false);
     setIsUpdating(true);
   };
 
-  const updateUserHandler = (event) => {
-    event.preventDefault();
-
+  const resetForm = () => {
     setIsUpdating(false);
+    setIsUpdatingUsername(false);
+    setIsUpdatingPassword(false);
+    setIsUpdatingEmail(false);
   };
 
-  // const getFormData = () => {
-  //   const data = {
-  //     username: document.querySelector("#username").value,
-  //     password: document.querySelector("#password").value,
-  //     email: document.querySelector("#email").value,
-  //   };
+  const getFormData = () => {
+    let username;
+    let password;
+    let email;
 
-  //   return data;
-  // };
+    isUpdatingUsername
+      ? (username = document.querySelector("#username").value)
+      : (username = user.username);
+
+    isUpdatingPassword
+      ? (password = document.querySelector("#password").value)
+      : (password = user.password);
+
+    isUpdatingEmail
+      ? (email = document.querySelector("#email").value)
+      : (email = user.email);
+
+    const data = {
+      username: username,
+      password: password,
+      email: email,
+    };
+
+    return data;
+  };
 
   const settings = (
     <Card>
@@ -87,17 +114,34 @@ export default function UserSettings() {
           <button onClick={showEmail}>Change Email</button>
         )}
       </>
-      <form className="userUpdate-form" onClick={updateUserHandler}>
+      <form className="userUpdate-form" onSubmit={updateUserHandler}>
         {isUpdatingUsername ? (
-          <input type="text" id="username" placeholder="New username" />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="New username"
+            defaultValue={user.username}
+          />
         ) : null}
         {isUpdatingPassword ? (
-          <input type="password" id="password" placeholder="New password" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="New password"
+          />
         ) : null}
         {isUpdatingEmail ? (
-          <input type="email" id="email" placeholder="New email" />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="New email"
+            defaultValue={user.email}
+          />
         ) : null}
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </Card>
   );
