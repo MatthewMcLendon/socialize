@@ -158,5 +158,3 @@ export default function UserSettings() {
     </>
   );
 }
-
-// continue here: work on updating user profile.
