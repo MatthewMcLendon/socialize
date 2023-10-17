@@ -101,17 +101,22 @@ export default function UserSettings() {
 
   const updateForm = (
     <Card>
-      <>
-        {isUpdatingUsername ? null : (
-          <button onClick={showUsername}>Change Username</button>
-        )}
-        {isUpdatingPassword ? null : (
-          <button onClick={showPassword}>Change Password</button>
-        )}
-        {isUpdatingEmail ? null : (
-          <button onClick={showEmail}>Change Email</button>
-        )}
-      </>
+      <button
+        onClick={() => {
+          resetForm();
+        }}
+      >
+        X
+      </button>
+      {isUpdatingUsername ? null : (
+        <button onClick={showUsername}>Change Username</button>
+      )}
+      {isUpdatingPassword ? null : (
+        <button onClick={showPassword}>Change Password</button>
+      )}
+      {isUpdatingEmail ? null : (
+        <button onClick={showEmail}>Change Email</button>
+      )}
       <form className="userUpdate-form" onSubmit={updateUserHandler}>
         {isUpdatingUsername ? (
           <input
