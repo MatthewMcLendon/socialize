@@ -3,8 +3,14 @@
     {
       "username": "test",
       "password": "test",
-      "email": "test@test.com",
+      "email": "test@testupdated.com",
       "id": 1
+    },
+    {
+      "username": "test2",
+      "password": "test",
+      "email": "test@gmail.com",
+      "id": 3
     }
   ],
   "threads": [],
