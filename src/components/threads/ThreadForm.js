@@ -22,8 +22,7 @@ export default function ThreadForm() {
       moderators: [...moderatorIds, user.id],
     };
 
-    setMessage();
-    setModerators([]);
+    clearForm();
     console.log("Submit", newThread);
   };
 
@@ -55,6 +54,14 @@ export default function ThreadForm() {
     }
 
     setMessage("User not found");
+  };
+
+  const clearForm = () => {
+    document.querySelector("#thread-name").value = "";
+    document.querySelector("#thread-description").value = "";
+    document.querySelector("#moderator-search").value = "";
+    setMessage();
+    setModerators([]);
   };
 
   const moderatorList = (
