@@ -1,7 +1,7 @@
 import "./UserSettings.css";
 import { useContext, useState } from "react";
 import { UserContext } from "./UserProvider";
-import Card from "../style/card";
+import Card from "../style/Card";
 
 export default function UserSettings() {
   const { user, deleteUser, updateUser } = useContext(UserContext);
