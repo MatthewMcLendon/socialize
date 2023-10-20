@@ -6,6 +6,7 @@ import ThreadProvider from "./components/threads/ThreadProvider";
 import LoginPage from "./components/routes/LoginPage";
 import HomePage from "./components/routes/HomePage";
 import ProfilePage from "./components/routes/ProfilePage";
+import ThreadPage from "./components/routes/ThreadPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/threads" element={<ThreadPage />} />
           </Routes>
         </ThreadProvider>
       </UserProvider>
