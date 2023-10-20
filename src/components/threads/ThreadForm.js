@@ -11,7 +11,17 @@ export default function ThreadForm() {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    console.log("Submit");
+    let moderatorIds = [];
+    moderators.map((moderator) => moderatorIds.push(moderator.id));
+
+    const newThread = {
+      name: document.querySelector("#thread-name").value,
+      description: document.querySelector("#thread-description").value,
+      posts: [],
+      moderators: [...moderatorIds, user.id],
+    };
+
+    console.log("Submit", newThread);
   };
 
   const addModeratorHandler = () => {
@@ -41,10 +51,15 @@ export default function ThreadForm() {
     <Card>
       <form id="thread-form" onSubmit={submitHandler}>
         <input type="hidden" />
-        <input type="text" placeholder="Thread name" required />
+        <input
+          type="text"
+          id="thread-name"
+          placeholder="Thread name"
+          required
+        />
         <textarea
           name="description"
-          id=""
+          id="thread-description"
           cols="30"
           rows="10"
           placeholder="Thread description"
