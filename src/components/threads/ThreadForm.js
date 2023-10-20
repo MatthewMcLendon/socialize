@@ -1,10 +1,12 @@
 import "./ThreadForm.css";
 import Card from "../style/Card";
 import { UserContext } from "../users/UserProvider";
+import { ThreadContext } from "./ThreadProvider";
 import { useContext, useState } from "react";
 
 export default function ThreadForm() {
   const { users, user } = useContext(UserContext);
+  const { addThread } = useContext(ThreadContext);
 
   const [moderators, setModerators] = useState([]);
   const [message, setMessage] = useState();
@@ -23,7 +25,7 @@ export default function ThreadForm() {
     };
 
     clearForm();
-    console.log("Submit", newThread);
+    addThread(newThread);
   };
 
   const addModeratorHandler = () => {
