@@ -7,6 +7,7 @@ export default function ThreadForm() {
   const { users, user } = useContext(UserContext);
 
   const [moderators, setModerators] = useState([]);
+  const [message, setMessage] = useState();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -21,6 +22,8 @@ export default function ThreadForm() {
       moderators: [...moderatorIds, user.id],
     };
 
+    setMessage();
+    setModerators([]);
     console.log("Submit", newThread);
   };
 
@@ -31,12 +34,27 @@ export default function ThreadForm() {
     if (moderator) {
       setModerators([...moderators, moderator]);
       document.querySelector("#moderator-search").value = "";
+      setMessage();
     }
   };
 
   const moderatorCheck = (username) => {
     const foundModerator = users.find((user) => user.username === username);
-    return foundModerator;
+
+    if (foundModerator) {
+      if (foundModerator.id === user.id) {
+        setMessage("You are already a moderator");
+        return;
+      }
+      if (moderators.includes(foundModerator)) {
+        setMessage("duplicate");
+        return;
+      } else {
+        return foundModerator;
+      }
+    }
+
+    setMessage("User not found");
   };
 
   const moderatorList = (
@@ -68,6 +86,7 @@ export default function ThreadForm() {
         <button type="button" onClick={addModeratorHandler}>
           Add moderator
         </button>
+        {message ? <p>{message}</p> : null}
         {moderatorList}
       </form>
       <button type="submit" form="thread-form">
