@@ -16,10 +16,10 @@ export default function Navbar() {
         <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <Link to={"/subscriptions"}>Subscriptions</Link>
+        <Link to={"/profile"}>Profile</Link>
       </li>
       <li>
-        <Link to={"/profile"}>Profile</Link>
+        <Link to={"/threads"}>Threads</Link>
       </li>
     </ul>
   ) : (
