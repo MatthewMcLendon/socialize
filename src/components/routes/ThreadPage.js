@@ -1,18 +1,12 @@
-import { useContext } from "react";
-import { ThreadContext } from "../threads/ThreadProvider";
 import ThreadForm from "../threads/ThreadForm";
-import Thread from "../threads/Thread";
+import ThreadList from "../threads/ThreadList";
 
 export default function ThreadPage() {
-  const { threads } = useContext(ThreadContext);
-
   return (
     <main>
       <h2>Threads</h2>
       <ThreadForm />
-      {threads.map((thread) => (
-        <Thread thread={thread} />
-      ))}
+      <ThreadList />
     </main>
   );
 }
