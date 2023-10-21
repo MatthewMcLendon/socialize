@@ -1,5 +1,5 @@
 import "./Thread.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ThreadContext } from "./ThreadProvider";
 import { useContext } from "react";
 

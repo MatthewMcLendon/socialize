@@ -31,8 +31,20 @@ export default function ThreadProvider(props) {
     }).then(getThreads);
   };
 
+  const updateThread = (thread) => {
+    return fetch(`http://localhost:8088/threads/${thread.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(thread),
+    }).then(getThreads);
+  };
+
   return (
-    <ThreadContext.Provider value={{ threads, addThread, deleteThread }}>
+    <ThreadContext.Provider
+      value={{ threads, addThread, deleteThread, updateThread }}
+    >
       {props.children}
     </ThreadContext.Provider>
   );
