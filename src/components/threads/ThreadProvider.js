@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 export const ThreadContext = createContext();
 
 export default function ThreadProvider(props) {
-  const [threads, setThreads] = useState();
+  const [threads, setThreads] = useState([]);
 
   useEffect(() => {
     getThreads();
@@ -22,11 +22,17 @@ export default function ThreadProvider(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(thread),
-    });
+    }).then(getThreads);
+  };
+
+  const deleteThread = (thread) => {
+    return fetch(`http://localhost:8088/threads/${thread.id}`, {
+      method: "DELETE",
+    }).then(getThreads);
   };
 
   return (
-    <ThreadContext.Provider value={{ addThread }}>
+    <ThreadContext.Provider value={{ threads, addThread, deleteThread }}>
       {props.children}
     </ThreadContext.Provider>
   );

@@ -13,17 +13,7 @@
       "id": 3
     }
   ],
-  "threads": [
-    {
-      "name": "Test Thread",
-      "description": "This is a test",
-      "posts": [],
-      "moderators": [
-        1
-      ],
-      "id": 1
-    }
-  ],
+  "threads": [],
   "posts": [],
   "comments": []
 }
