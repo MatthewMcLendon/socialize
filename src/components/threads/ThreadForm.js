@@ -91,13 +91,13 @@ export default function ThreadForm() {
           rows="10"
           placeholder="Thread description"
         />
-        <input type="search" id="moderator-search" placeholder="Moderators" />
-        <button type="button" onClick={addModeratorHandler}>
-          Add moderator
-        </button>
-        {message ? <p>{message}</p> : null}
-        {moderatorList}
       </form>
+      <input type="search" id="moderator-search" placeholder="Moderators" />
+      <button type="button" onClick={addModeratorHandler}>
+        Add moderator
+      </button>
+      {message ? <p>{message}</p> : null}
+      {moderatorList}
       <button type="submit" form="thread-form">
         Submit
       </button>
