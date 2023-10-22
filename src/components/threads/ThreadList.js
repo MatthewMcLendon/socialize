@@ -3,12 +3,11 @@ import { ThreadContext } from "../threads/ThreadProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function ThreadList() {
-  const { threads, setThread } = useContext(ThreadContext);
+  const { threads } = useContext(ThreadContext);
 
   const navigate = useNavigate();
 
   const navigationHandler = (thread) => {
-    setThread(thread);
     navigate(`/threads/${thread.id}`);
   };
 

@@ -4,7 +4,6 @@ export const ThreadContext = createContext();
 
 export default function ThreadProvider(props) {
   const [threads, setThreads] = useState([]);
-  const [thread, setThread] = useState();
 
   useEffect(() => {
     getThreads();
@@ -44,14 +43,7 @@ export default function ThreadProvider(props) {
 
   return (
     <ThreadContext.Provider
-      value={{
-        threads,
-        thread,
-        addThread,
-        deleteThread,
-        updateThread,
-        setThread,
-      }}
+      value={{ threads, addThread, deleteThread, updateThread }}
     >
       {props.children}
     </ThreadContext.Provider>

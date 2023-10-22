@@ -1,14 +1,18 @@
 import "./Thread.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ThreadContext } from "./ThreadProvider";
 import { useContext } from "react";
 
 export default function Thread() {
-  const { deleteThread, thread } = useContext(ThreadContext);
+  const { threads, deleteThread } = useContext(ThreadContext);
+  const { id } = useParams();
+
+  const thread = threads.find((thread) => thread.id.toString() === id);
+
   const navigate = useNavigate();
 
   const deleteHandler = () => {
-    deleteThread(thread);
+    deleteThread();
     navigate("/home");
   };
 
