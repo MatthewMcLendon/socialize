@@ -16,7 +16,7 @@ export default function Navbar() {
         <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <Link to={"/profile"}>Profile</Link>
+        <Link to={`/profile/${user.id}`}>Profile</Link>
       </li>
       <li>
         <Link to={"/threads"}>Threads</Link>

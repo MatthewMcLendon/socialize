@@ -1,12 +1,9 @@
-import ThreadForm from "../threads/ThreadForm";
-import ThreadList from "../threads/ThreadList";
+import Thread from "../threads/Thread";
 
 export default function ThreadPage() {
   return (
     <main>
-      <h2>Threads</h2>
-      <ThreadForm />
-      <ThreadList />
+      <Thread />
     </main>
   );
 }
