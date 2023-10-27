@@ -15,6 +15,14 @@ export default function ThreadProvider(props) {
       .then((response) => setThreads(response));
   };
 
+  const getThreadById = (id) => {
+    return fetch(`http://localhost:8088/threads/${id}`)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   const addThread = (thread) => {
     return fetch("http://localhost:8088/threads", {
       method: "POST",
@@ -43,7 +51,7 @@ export default function ThreadProvider(props) {
 
   return (
     <ThreadContext.Provider
-      value={{ threads, addThread, deleteThread, updateThread }}
+      value={{ threads, addThread, deleteThread, updateThread, getThreadById }}
     >
       {props.children}
     </ThreadContext.Provider>

@@ -2,7 +2,7 @@
   "users": [
     {
       "username": "test",
-      "password": "test",
+      "password": "",
       "email": "test@testupdated.com",
       "id": 1
     },
@@ -42,6 +42,16 @@
         1
       ],
       "id": 3
+    },
+    {
+      "name": "Test thread 7",
+      "description": "this is a demo ",
+      "posts": [],
+      "moderators": [
+        3,
+        1
+      ],
+      "id": 4
     }
   ],
   "posts": [],
