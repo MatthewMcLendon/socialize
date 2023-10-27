@@ -16,11 +16,9 @@ export default function ThreadProvider(props) {
   };
 
   const getThreadById = (id) => {
-    return fetch(`http://localhost:8088/threads/${id}`)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-      });
+    return fetch(`http://localhost:8088/threads/${id}`).then((response) =>
+      response.json()
+    );
   };
 
   const addThread = (thread) => {
