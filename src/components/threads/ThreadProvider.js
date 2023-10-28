@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 export const ThreadContext = createContext();
 
 export default function ThreadProvider(props) {
-  const [threads, setThreads] = useState();
+  const [threads, setThreads] = useState([]);
 
   useEffect(() => {
     getThreads();
