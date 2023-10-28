@@ -11,7 +11,7 @@ export default function ThreadList() {
     navigate(`/threads/${thread.id}`);
   };
 
-  return (
+  const threadList = threads ? (
     <ul>
       {threads.map((thread) => (
         <li
@@ -24,7 +24,11 @@ export default function ThreadList() {
         </li>
       ))}
     </ul>
+  ) : (
+    <p>Loading....</p>
   );
+
+  return <>{threadList}</>;
 }
 
-// Consider changing from using the threads context to passing in an array of thread objects. Then can be more flexbile for showing user subscriptions. 
+// May change to use a provided list instead of context for user subscriptions.
