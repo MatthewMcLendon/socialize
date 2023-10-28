@@ -4,12 +4,17 @@ import { ThreadContext } from "./ThreadProvider";
 import { useContext, useEffect, useState } from "react";
 
 export default function Thread() {
-  const { deleteThread, getThreadById } = useContext(ThreadContext);
+  const { threads, deleteThread, getThreadById } = useContext(ThreadContext);
   const [thread, setThread] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-    getThread();
+    if (threads) {
+      setThread(threads.find((thread) => thread.id === Number(id)));
+      console.log(threads, thread);
+    } else {
+      getThread();
+    }
   }, []);
 
   const navigate = useNavigate();
@@ -32,3 +37,5 @@ export default function Thread() {
     </>
   );
 }
+
+// add thread settings. Check if moderator, delete, update

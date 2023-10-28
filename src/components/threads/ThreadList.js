@@ -11,7 +11,7 @@ export default function ThreadList() {
     navigate(`/threads/${thread.id}`);
   };
 
-  return (
+  const threadList = threads ? (
     <ul>
       {threads.map((thread) => (
         <li
@@ -24,5 +24,9 @@ export default function ThreadList() {
         </li>
       ))}
     </ul>
+  ) : (
+    <p>Loading....</p>
   );
+
+  return <>{threadList}</>;
 }
