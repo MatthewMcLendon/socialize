@@ -18,39 +18,28 @@
       "name": "Test thread",
       "description": "This is a test",
       "posts": [],
-      "moderators": [
-        3,
-        1
-      ],
+      "moderators": [3, 1],
       "id": 1
     },
     {
       "name": "Test thread 2",
       "description": "This is another test",
       "posts": [],
-      "moderators": [
-        1
-      ],
+      "moderators": [1],
       "id": 2
     },
     {
       "name": "Test thread 3",
       "description": "This is yet another test",
       "posts": [],
-      "moderators": [
-        3,
-        1
-      ],
+      "moderators": [3, 1],
       "id": 3
     },
     {
       "name": "Test thread 7",
       "description": "this is a demo ",
       "posts": [],
-      "moderators": [
-        3,
-        1
-      ],
+      "moderators": [3],
       "id": 4
     }
   ],
