@@ -31,6 +31,9 @@ export default function ThreadSettings({ thread }) {
       thread.description = data.description;
     }
 
+    clearFormData();
+    setIsVisible(false);
+
     updateThread(thread);
 
     console.log(data);
@@ -43,6 +46,11 @@ export default function ThreadSettings({ thread }) {
     };
 
     return data;
+  };
+
+  const clearFormData = () => {
+    document.querySelector("#thread-name").value = null;
+    document.querySelector("#thread-description").value = null;
   };
 
   const threadSettings = (
