@@ -41,6 +41,15 @@
         3
       ],
       "id": 4
+    },
+    {
+      "name": "Def a real thread",
+      "description": "This is totally real and not fake. ",
+      "posts": [],
+      "moderators": [
+        1
+      ],
+      "id": 5
     }
   ],
   "posts": [],
