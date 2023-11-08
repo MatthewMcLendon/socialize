@@ -43,8 +43,8 @@
       "id": 4
     },
     {
-      "name": "Def a real thread",
-      "description": "This is totally real and not fake. ",
+      "name": "test that is real",
+      "description": "Another test",
       "posts": [],
       "moderators": [
         1

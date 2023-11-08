@@ -42,6 +42,7 @@ export default function Thread() {
       {thread ? (
         <>
           <h2>{thread.name}</h2>
+          <p>{thread.description}</p>
         </>
       ) : null}
       {isModerator ? <ThreadSettings thread={thread} /> : null}

@@ -4,7 +4,7 @@ import { ThreadContext } from "./ThreadProvider";
 import Card from "../style/Card";
 
 export default function ThreadSettings({ thread }) {
-  const { deleteThread } = useContext(ThreadContext);
+  const { deleteThread, updateThread } = useContext(ThreadContext);
   const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate();
@@ -22,12 +22,23 @@ export default function ThreadSettings({ thread }) {
     event.preventDefault();
 
     const data = getFormData();
+
+    if (data.name) {
+      thread.name = data.name;
+    }
+
+    if (data.description) {
+      thread.description = data.description;
+    }
+
+    updateThread(thread);
+
     console.log(data);
   };
 
   const getFormData = () => {
     const data = {
-      name: document.querySelector("#thread-update-form").value,
+      name: document.querySelector("#thread-name").value,
       description: document.querySelector("#thread-description").value,
     };
 
@@ -46,7 +57,7 @@ export default function ThreadSettings({ thread }) {
       </button>
       <button onClick={deleteHandler}>Delete thread</button>
       <form id="thread-update-form" onSubmit={submitHandler}>
-        <input type="text" placeholder={thread.name} />
+        <input type="text" id="thread-name" placeholder={thread.name} />
         <textarea
           name="description"
           id="thread-description"
