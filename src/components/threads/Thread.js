@@ -1,5 +1,5 @@
 import "./Thread.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ThreadContext } from "./ThreadProvider";
 import { UserContext } from "../users/UserProvider";
 import { useContext, useEffect, useState } from "react";
@@ -32,8 +32,7 @@ export default function Thread() {
   };
 
   const moderatorCheck = () => {
-    if (thread.moderators.includes(1)) {
-      console.log(user, "Moderator!");
+    if (thread.moderators.includes(user.id)) {
       setIsModerator(true);
     }
   };
@@ -49,5 +48,3 @@ export default function Thread() {
     </>
   );
 }
-
-// add thread settings. Check if moderator, delete, update

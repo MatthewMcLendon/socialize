@@ -39,9 +39,9 @@ export default function Navbar() {
   );
 
   return (
-    <div className="navbar-container">
+    <nav className="navbar-container">
       {links}
       {buttons}
-    </div>
+    </nav>
   );
 }
