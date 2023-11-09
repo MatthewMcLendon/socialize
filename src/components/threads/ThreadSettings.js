@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThreadContext } from "./ThreadProvider";
+import { UserContext } from "../users/UserProvider";
 import Card from "../style/Card";
 
 export default function ThreadSettings({ thread }) {
   const { deleteThread, updateThread } = useContext(ThreadContext);
+  const { users } = useContext(UserContext);
   const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate();
@@ -12,10 +14,6 @@ export default function ThreadSettings({ thread }) {
   const deleteHandler = () => {
     deleteThread(thread);
     navigate("/");
-  };
-
-  const visibilityHandler = () => {
-    setIsVisible(true);
   };
 
   const submitHandler = (event) => {
@@ -73,6 +71,7 @@ export default function ThreadSettings({ thread }) {
           rows="10"
           placeholder={thread.description}
         ></textarea>
+        {}
         <button>Update</button>
       </form>
     </Card>
@@ -80,8 +79,19 @@ export default function ThreadSettings({ thread }) {
 
   return (
     <>
-      <button onClick={visibilityHandler}>Settings</button>
-      {isVisible ? threadSettings : null}
+      {isVisible ? (
+        threadSettings
+      ) : (
+        <button
+          onClick={() => {
+            setIsVisible(true);
+          }}
+        >
+          Settings
+        </button>
+      )}
     </>
   );
 }
+
+// Continue here: add moderator add / delete
