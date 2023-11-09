@@ -7,9 +7,21 @@ import Card from "../style/Card";
 export default function ThreadSettings({ thread }) {
   const { deleteThread, updateThread } = useContext(ThreadContext);
   const { users } = useContext(UserContext);
+
   const [isVisible, setIsVisible] = useState(false);
+  const [moderators, setModerators] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    thread.moderators.map((moderator) => {
+      users.map((user) => {
+        if (user.id === moderator) {
+          return setModerators([...moderators, { user }]);
+        }
+      });
+    });
+  }, []);
 
   const deleteHandler = () => {
     deleteThread(thread);
@@ -71,7 +83,7 @@ export default function ThreadSettings({ thread }) {
           rows="10"
           placeholder={thread.description}
         ></textarea>
-        {}
+        <ul>{console.log(moderators)}</ul>
         <button>Update</button>
       </form>
     </Card>
