@@ -6,7 +6,7 @@ import Card from "../style/Card";
 
 export default function ThreadSettings({ thread }) {
   const { deleteThread, updateThread } = useContext(ThreadContext);
-  const { getUserById } = useContext(UserContext);
+  const { getUserById, users } = useContext(UserContext);
 
   const [isVisible, setIsVisible] = useState(false);
   const [moderators, setModerators] = useState([]);
@@ -15,9 +15,6 @@ export default function ThreadSettings({ thread }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (thread) {
-    //   populateModerators();
-    // }
     populateModerators();
   }, []);
 
@@ -35,6 +32,24 @@ export default function ThreadSettings({ thread }) {
   const removeModeratorHandler = (id) => {
     console.log(id);
     let newModerators = moderators;
+  };
+
+  const addModeratorHandler = (username) => {
+    const newMod = users.find((user) => user.username === username);
+
+    if (newMod) {
+      if (users.find((moderator) => moderator.username === newMod.username)) {
+        setMessage("User is already a moderator!");
+        return;
+      } else {
+        let mods = moderators;
+        mods.push(newMod);
+        setModerators(mods);
+        console.log(mods);
+      }
+    } else {
+      setMessage("User not found, please try again.");
+    }
   };
 
   const deleteHandler = () => {
@@ -73,9 +88,7 @@ export default function ThreadSettings({ thread }) {
     clearFormData();
     setIsVisible(false);
 
-    updateThread(thread);
-
-    console.log(data);
+    // updateThread(thread);
   };
 
   const getFormData = () => {
@@ -112,8 +125,22 @@ export default function ThreadSettings({ thread }) {
           rows="10"
           placeholder={thread.description}
         ></textarea>
+        <input
+          id="moderator-username"
+          type="text"
+          placeholder="Moderator username"
+        />{" "}
+        <button
+          type="button"
+          onClick={() => {
+            addModeratorHandler(
+              document.querySelector("#moderator-username").value
+            );
+          }}
+        >
+          Add moderator
+        </button>
         <ul>
-          {console.log(thread.moderators, moderators)}
           {moderators.map((mod) => {
             return (
               <li key={mod.id}>
