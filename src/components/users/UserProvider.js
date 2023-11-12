@@ -82,6 +82,7 @@ export default function UserProvider(props) {
         logOutUser,
         deleteUser,
         updateUser,
+        getUserById,
       }}
     >
       {props.children}

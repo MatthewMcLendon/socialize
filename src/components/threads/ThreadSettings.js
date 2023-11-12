@@ -6,7 +6,7 @@ import Card from "../style/Card";
 
 export default function ThreadSettings({ thread }) {
   const { deleteThread, updateThread } = useContext(ThreadContext);
-  const { users } = useContext(UserContext);
+  const { getUserById } = useContext(UserContext);
 
   const [isVisible, setIsVisible] = useState(false);
   const [moderators, setModerators] = useState([]);
@@ -14,14 +14,18 @@ export default function ThreadSettings({ thread }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    thread.moderators.map((moderator) => {
-      users.map((user) => {
-        if (user.id === moderator) {
-          return setModerators([...moderators, { user }]);
-        }
-      });
-    });
+    // if (thread) {
+    //   populateModerators();
+    // }
+    populateModerators();
   }, []);
+
+  const populateModerators = () => {
+    thread.moderators.map(async (mod) => {
+      const moderator = await getUserById(mod);
+      setModerators([...moderators, moderator]);
+    });
+  };
 
   const deleteHandler = () => {
     deleteThread(thread);
@@ -83,7 +87,11 @@ export default function ThreadSettings({ thread }) {
           rows="10"
           placeholder={thread.description}
         ></textarea>
-        <ul>{console.log(moderators)}</ul>
+        <ul>
+          {moderators.map((mod) => {
+            return <li key={mod.id}>{mod.username} <button>Remove Moderator</button></li>;
+          })}
+        </ul>
         <button>Update</button>
       </form>
     </Card>
@@ -105,5 +113,3 @@ export default function ThreadSettings({ thread }) {
     </>
   );
 }
-
-// Continue here: add moderator add / delete

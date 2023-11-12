@@ -23,6 +23,7 @@ export default function Thread() {
     if (user && thread) {
       moderatorCheck();
     }
+    // console.log("reload");
   }, [user, thread]);
 
   const getThread = async () => {
