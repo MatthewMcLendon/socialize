@@ -10,6 +10,7 @@ export default function ThreadSettings({ thread }) {
 
   const [isVisible, setIsVisible] = useState(false);
   const [moderators, setModerators] = useState([]);
+  const [message, setMessage] = useState();
 
   const navigate = useNavigate();
 
@@ -21,10 +22,19 @@ export default function ThreadSettings({ thread }) {
   }, []);
 
   const populateModerators = () => {
+    let modArray = [];
+
     thread.moderators.map(async (mod) => {
-      const moderator = await getUserById(mod);
-      setModerators([...moderators, moderator]);
+      const modData = await getUserById(mod);
+      modArray.push(modData);
     });
+
+    setModerators(modArray);
+  };
+
+  const removeModeratorHandler = (id) => {
+    console.log(id);
+    let newModerators = moderators;
   };
 
   const deleteHandler = () => {
@@ -36,6 +46,21 @@ export default function ThreadSettings({ thread }) {
     event.preventDefault();
 
     const data = getFormData();
+
+    if (moderators.length === 0) {
+      setMessage(
+        "Must have moderators. Please add a moderator to the thread or delete the thread."
+      );
+      return;
+    } else {
+      let modIds = [];
+      moderators.map((mod) => {
+        modIds.push(mod.id);
+      });
+
+      console.log(modIds);
+      // thread.moderators = modIds;
+    }
 
     if (data.name) {
       thread.name = data.name;
@@ -88,10 +113,24 @@ export default function ThreadSettings({ thread }) {
           placeholder={thread.description}
         ></textarea>
         <ul>
+          {console.log(thread.moderators, moderators)}
           {moderators.map((mod) => {
-            return <li key={mod.id}>{mod.username} <button>Remove Moderator</button></li>;
+            return (
+              <li key={mod.id}>
+                {mod.username}{" "}
+                <button
+                  type="button"
+                  onClick={() => {
+                    removeModeratorHandler(mod.id);
+                  }}
+                >
+                  Remove Moderator
+                </button>
+              </li>
+            );
           })}
         </ul>
+        {message ? <p>{message}</p> : null}
         <button>Update</button>
       </form>
     </Card>
