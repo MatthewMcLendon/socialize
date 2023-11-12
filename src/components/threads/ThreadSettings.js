@@ -18,6 +18,7 @@ export default function ThreadSettings({ thread }) {
     populateModerators();
   }, []);
 
+  // Moderator functions:
   const populateModerators = () => {
     let modArray = [];
 
@@ -30,28 +31,29 @@ export default function ThreadSettings({ thread }) {
   };
 
   const removeModeratorHandler = (id) => {
-    console.log(id);
-    let newModerators = moderators;
+    let newModerators = moderators.filter((mod) => mod.id !== id);
+    setModerators(newModerators);
   };
 
   const addModeratorHandler = (username) => {
     const newMod = users.find((user) => user.username === username);
 
     if (newMod) {
-      if (users.find((moderator) => moderator.username === newMod.username)) {
+      if (
+        moderators.find((moderator) => moderator.username === newMod.username)
+      ) {
         setMessage("User is already a moderator!");
         return;
       } else {
-        let mods = moderators;
-        mods.push(newMod);
-        setModerators(mods);
-        console.log(mods);
+        const newMods = [...moderators, newMod];
+        setModerators(newMods);
       }
     } else {
       setMessage("User not found, please try again.");
     }
   };
 
+  // Thread functions:
   const deleteHandler = () => {
     deleteThread(thread);
     navigate("/");
@@ -91,6 +93,7 @@ export default function ThreadSettings({ thread }) {
     // updateThread(thread);
   };
 
+  // Form functions:
   const getFormData = () => {
     const data = {
       name: document.querySelector("#thread-name").value,
@@ -107,7 +110,7 @@ export default function ThreadSettings({ thread }) {
 
   const threadSettings = (
     <Card>
-      <h1>Menu</h1>
+      <h1>Thread Settings</h1>
       <button
         onClick={() => {
           setIsVisible(false);
