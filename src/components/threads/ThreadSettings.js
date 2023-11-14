@@ -72,10 +72,9 @@ export default function ThreadSettings({ thread }) {
     } else {
       let modIds = [];
       moderators.map((mod) => {
-        modIds.push(mod.id);
+        return modIds.push(mod.id);
       });
 
-      console.log(modIds);
       thread.moderators = modIds;
     }
 
@@ -106,18 +105,18 @@ export default function ThreadSettings({ thread }) {
   const clearFormData = () => {
     document.querySelector("#thread-name").value = null;
     document.querySelector("#thread-description").value = null;
+    setMessage();
+  };
+
+  const closeForm = () => {
+    setIsVisible(false);
+    clearFormData();
   };
 
   const threadSettings = (
     <Card>
       <h1>Thread Settings</h1>
-      <button
-        onClick={() => {
-          setIsVisible(false);
-        }}
-      >
-        X
-      </button>
+      <button onClick={closeForm}>X</button>
       <button onClick={deleteHandler}>Delete thread</button>
       <form id="thread-update-form" onSubmit={submitHandler}>
         <input type="text" id="thread-name" placeholder={thread.name} />

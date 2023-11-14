@@ -47,7 +47,8 @@
       "description": "Last test? ",
       "posts": [],
       "moderators": [
-        1
+        1,
+        3
       ],
       "id": 5
     }

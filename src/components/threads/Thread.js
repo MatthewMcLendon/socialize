@@ -6,37 +6,29 @@ import { useContext, useEffect, useState } from "react";
 import ThreadSettings from "./ThreadSettings";
 
 export default function Thread() {
-  const { threads, getThreadById } = useContext(ThreadContext);
+  const { threads } = useContext(ThreadContext);
   const { user } = useContext(UserContext);
 
   const [isModerator, setIsModerator] = useState(false);
   const [thread, setThread] = useState();
+
   const { id } = useParams();
 
   useEffect(() => {
-    threads
-      ? setThread(threads.find((thread) => thread.id === Number(id)))
-      : getThread();
-  }, []);
+    const moderatorCheck = (thread) => {
+      if (thread.moderators.includes(user.id)) {
+        setIsModerator(true);
+      }
+    };
 
-  useEffect(() => {
-    if (user && thread) {
-      moderatorCheck();
+    if (threads && user) {
+      const loadedThread = threads.find((thread) => thread.id === Number(id));
+      setThread(loadedThread);
+      moderatorCheck(loadedThread);
     }
-    // console.log("reload");
-  }, [user, thread]);
 
-  const getThread = async () => {
-    await getThreadById(id).then((response) => {
-      setThread(response);
-    });
-  };
-
-  const moderatorCheck = () => {
-    if (thread.moderators.includes(user.id)) {
-      setIsModerator(true);
-    }
-  };
+    console.log("loading");
+  }, [threads, user, id]);
 
   return (
     <>
