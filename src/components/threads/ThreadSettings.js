@@ -90,7 +90,7 @@ export default function ThreadSettings({ thread }) {
     clearFormData();
     setIsVisible(false);
 
-    // updateThread(thread);
+    updateThread(thread);
   };
 
   // Form functions:
@@ -182,5 +182,3 @@ export default function ThreadSettings({ thread }) {
     </>
   );
 }
-
-// continue with updating/ deleting new mods to thread
