@@ -76,7 +76,7 @@ export default function ThreadSettings({ thread }) {
       });
 
       console.log(modIds);
-      // thread.moderators = modIds;
+      thread.moderators = modIds;
     }
 
     if (data.name) {
@@ -182,3 +182,5 @@ export default function ThreadSettings({ thread }) {
     </>
   );
 }
+
+// continue with updating/ deleting new mods to thread
