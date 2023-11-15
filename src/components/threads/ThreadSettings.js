@@ -31,8 +31,7 @@ export default function ThreadSettings({ thread }) {
   };
 
   const removeModeratorHandler = (id) => {
-    let newModerators = moderators.filter((mod) => mod.id !== id);
-    setModerators(newModerators);
+    setModerators(moderators.filter((mod) => mod.id !== id));
   };
 
   const addModeratorHandler = (username) => {
@@ -45,8 +44,7 @@ export default function ThreadSettings({ thread }) {
         setMessage("User is already a moderator!");
         return;
       } else {
-        const newMods = [...moderators, newMod];
-        setModerators(newMods);
+        setModerators([...moderators, newMod]);
       }
     } else {
       setMessage("User not found, please try again.");
@@ -113,12 +111,13 @@ export default function ThreadSettings({ thread }) {
     clearFormData();
   };
 
+  // Render
   const threadSettings = (
     <Card>
       <h1>Thread Settings</h1>
       <button onClick={closeForm}>X</button>
       <button onClick={deleteHandler}>Delete thread</button>
-      <form id="thread-update-form" onSubmit={submitHandler}>
+      <div>
         <input type="text" id="thread-name" placeholder={thread.name} />
         <textarea
           name="description"
@@ -127,21 +126,23 @@ export default function ThreadSettings({ thread }) {
           rows="10"
           placeholder={thread.description}
         ></textarea>
-        <input
-          id="moderator-username"
-          type="text"
-          placeholder="Moderator username"
-        />{" "}
-        <button
-          type="button"
-          onClick={() => {
-            addModeratorHandler(
-              document.querySelector("#moderator-username").value
-            );
-          }}
-        >
-          Add moderator
-        </button>
+        <span>
+          <input
+            id="moderator-username"
+            type="text"
+            placeholder="Moderator username"
+          />{" "}
+          <button
+            type="button"
+            onClick={() => {
+              addModeratorHandler(
+                document.querySelector("#moderator-username").value
+              );
+            }}
+          >
+            Add moderator
+          </button>
+        </span>
         <ul>
           {moderators.map((mod) => {
             return (
@@ -160,8 +161,8 @@ export default function ThreadSettings({ thread }) {
           })}
         </ul>
         {message ? <p>{message}</p> : null}
-        <button>Update</button>
-      </form>
+        <button onClick={submitHandler}>Update</button>
+      </div>
     </Card>
   );
 

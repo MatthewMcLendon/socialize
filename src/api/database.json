@@ -43,8 +43,8 @@
       "id": 4
     },
     {
-      "name": "One more test",
-      "description": "Last test? ",
+      "name": "Another test",
+      "description": "Yet another test\n",
       "posts": [],
       "moderators": [
         1,

@@ -1,8 +1,8 @@
 import "./ThreadForm.css";
-import Card from "../style/Card";
 import { UserContext } from "../users/UserProvider";
 import { ThreadContext } from "./ThreadProvider";
 import { useContext, useState } from "react";
+import Card from "../style/Card";
 
 export default function ThreadForm() {
   const { users, user } = useContext(UserContext);
@@ -44,18 +44,18 @@ export default function ThreadForm() {
 
     if (foundModerator) {
       if (foundModerator.id === user.id) {
-        setMessage("You are already a moderator");
+        setMessage("You are already a moderator.");
         return;
       }
       if (moderators.includes(foundModerator)) {
-        setMessage("duplicate");
+        setMessage("User is already a moderator.");
         return;
       } else {
         return foundModerator;
       }
+    } else {
+      setMessage("User not found");
     }
-
-    setMessage("User not found");
   };
 
   const clearForm = () => {

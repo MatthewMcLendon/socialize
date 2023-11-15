@@ -30,5 +30,3 @@ export default function ThreadList() {
 
   return <>{threadList}</>;
 }
-
-// May change to use a provided list instead of context for user subscriptions.

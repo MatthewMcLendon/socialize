@@ -26,8 +26,6 @@ export default function Thread() {
       setThread(loadedThread);
       moderatorCheck(loadedThread);
     }
-
-    console.log("loading");
   }, [threads, user, id]);
 
   return (
