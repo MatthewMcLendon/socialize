@@ -66,6 +66,12 @@ export default function UserProvider(props) {
       .then((response) => setUsers(response));
   };
 
+  const getUserById = (id) => {
+    return fetch(`http://localhost:8088/users/${id}`).then((response) =>
+      response.json()
+    );
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -76,6 +82,7 @@ export default function UserProvider(props) {
         logOutUser,
         deleteUser,
         updateUser,
+        getUserById,
       }}
     >
       {props.children}

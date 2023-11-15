@@ -1,7 +1,7 @@
 import "./UserSettings.css";
 import { useContext, useState } from "react";
 import { UserContext } from "./UserProvider";
-import Card from "../style/card";
+import Card from "../style/Card";
 
 export default function UserSettings() {
   const { user, deleteUser, updateUser } = useContext(UserContext);
@@ -117,7 +117,7 @@ export default function UserSettings() {
       {isUpdatingEmail ? null : (
         <button onClick={showEmail}>Change Email</button>
       )}
-      <form className="userUpdate-form" onSubmit={updateUserHandler}>
+      <form id="userUpdate-form" onSubmit={updateUserHandler}>
         {isUpdatingUsername ? (
           <input
             type="text"
@@ -125,6 +125,7 @@ export default function UserSettings() {
             id="username"
             placeholder="New username"
             defaultValue={user.username}
+            required
           />
         ) : null}
         {isUpdatingPassword ? (
@@ -133,6 +134,8 @@ export default function UserSettings() {
             name="password"
             id="password"
             placeholder="New password"
+            defaultValue={user.password}
+            required
           />
         ) : null}
         {isUpdatingEmail ? (
@@ -142,6 +145,7 @@ export default function UserSettings() {
             id="email"
             placeholder="New email"
             defaultValue={user.email}
+            required
           />
         ) : null}
         <button type="submit">Submit</button>

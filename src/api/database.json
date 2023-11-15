@@ -13,7 +13,46 @@
       "id": 3
     }
   ],
-  "threads": [],
+  "threads": [
+    {
+      "name": "Test thread 2",
+      "description": "This is another test",
+      "posts": [],
+      "moderators": [
+        1
+      ],
+      "id": 2
+    },
+    {
+      "name": "Test thread 3",
+      "description": "This is yet another test",
+      "posts": [],
+      "moderators": [
+        1,
+        3
+      ],
+      "id": 3
+    },
+    {
+      "name": "Test thread 7",
+      "description": "this is a demo ",
+      "posts": [],
+      "moderators": [
+        3
+      ],
+      "id": 4
+    },
+    {
+      "name": "Another test",
+      "description": "Yet another test\n",
+      "posts": [],
+      "moderators": [
+        1,
+        3
+      ],
+      "id": 5
+    }
+  ],
   "posts": [],
   "comments": []
 }

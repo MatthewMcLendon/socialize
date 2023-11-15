@@ -16,10 +16,10 @@ export default function Navbar() {
         <Link to={"/"}>Home</Link>
       </li>
       <li>
-        <Link to={"/subscriptions"}>Subscriptions</Link>
+        <Link to={`/profile/${user.id}`}>Profile</Link>
       </li>
       <li>
-        <Link to={"/profile"}>Profile</Link>
+        <Link to={"/threads"}>Threads</Link>
       </li>
     </ul>
   ) : (
@@ -39,9 +39,9 @@ export default function Navbar() {
   );
 
   return (
-    <div className="navbar-container">
+    <nav className="navbar-container">
       {links}
       {buttons}
-    </div>
+    </nav>
   );
 }
