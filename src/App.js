@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
 import UserProvider from "./components/users/UserProvider";
 import ThreadProvider from "./components/threads/ThreadProvider";
+import PostProvider from "./components/posts/PostProvider";
 import LoginPage from "./components/routes/LoginPage";
 import HomePage from "./components/routes/HomePage";
 import ProfilePage from "./components/routes/ProfilePage";
@@ -14,14 +15,16 @@ function App() {
     <>
       <UserProvider>
         <ThreadProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile/:id" element={<ProfilePage />} />
-            <Route path="/threads" element={<ThreadExplorePage />} />
-            <Route path="/threads/:id" element={<ThreadPage />} />
-          </Routes>
+          <PostProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/profile/:id" element={<ProfilePage />} />
+              <Route path="/threads" element={<ThreadExplorePage />} />
+              <Route path="/threads/:id" element={<ThreadPage />} />
+            </Routes>
+          </PostProvider>
         </ThreadProvider>
       </UserProvider>
     </>

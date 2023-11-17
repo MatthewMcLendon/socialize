@@ -53,6 +53,17 @@
       "id": 5
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "title": "test post",
+      "text": "This is the first post in the db",
+      "image": "",
+      "user": 1,
+      "thread": "5",
+      "likes": [],
+      "comments": [],
+      "id": 1
+    }
+  ],
   "comments": []
 }

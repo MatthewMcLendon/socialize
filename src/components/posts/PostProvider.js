@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const PostContext = createContext();
 
-export default function PostProvider() {
+export default function PostProvider(props) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -24,4 +24,10 @@ export default function PostProvider() {
       body: JSON.stringify(post),
     }).then(getPosts);
   };
+
+  return (
+    <PostContext.Provider value={{ posts, addPost }}>
+      {props.children}
+    </PostContext.Provider>
+  );
 }
