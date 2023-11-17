@@ -32,15 +32,19 @@ export default function Thread() {
     }
   }, [threads, user, id]);
 
-  const threadContent = (
+  return (
     <>
-      <h2>{thread.name}</h2>
-      <p>{thread.description}</p>
-      {isModerator ? <ThreadSettings thread={thread} /> : null}
-      <PostForm threadId={id} />
-      <PostList posts={posts.filter((post) => post.thread === id)} />
+      {thread ? (
+        <>
+          <h2>{thread.name}</h2>
+          <p>{thread.description}</p>
+          {isModerator ? <ThreadSettings thread={thread} /> : null}
+          <PostForm threadId={id} />
+          <PostList posts={posts.filter((post) => post.thread === id)} />
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
-
-  return <>{thread ? threadContent : <p>Loading...</p>}</>;
 }
