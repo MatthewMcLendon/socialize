@@ -2,7 +2,7 @@ import "./UserForm.css";
 import { useState, useContext } from "react";
 import { UserContext } from "./UserProvider";
 import { useNavigate } from "react-router-dom";
-import Card from "../style/Card";
+import Card from "../style/card";
 
 export default function UserForm() {
   const { addUser, logInUser, users } = useContext(UserContext);
