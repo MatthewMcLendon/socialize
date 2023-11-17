@@ -1,4 +1,5 @@
 import UserSettings from "../users/UserSettings";
+import PostList from "../posts/PostList";
 
 export default function ProfilePage() {
   return (
