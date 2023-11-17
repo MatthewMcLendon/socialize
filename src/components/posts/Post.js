@@ -1,3 +1,9 @@
-export default function Post(post) {
-  return <p>{post.title}</p>;
+import Card from "../style/card";
+
+export default function Post({ post }) {
+  return (
+    <Card>
+      <p>{post.title}</p>
+    </Card>
+  );
 }

@@ -5,6 +5,7 @@ import { UserContext } from "../users/UserProvider";
 import { useContext, useEffect, useState } from "react";
 import ThreadSettings from "./ThreadSettings";
 import PostForm from "../posts/PostForm";
+import PostList from "../posts/PostList";
 
 export default function Thread() {
   const { threads } = useContext(ThreadContext);
@@ -36,6 +37,7 @@ export default function Thread() {
           <h2>{thread.name}</h2>
           <p>{thread.description}</p>
           <PostForm threadId={id} />
+          <PostList threadId={id} />
         </>
       ) : null}
       {isModerator ? <ThreadSettings thread={thread} /> : null}
