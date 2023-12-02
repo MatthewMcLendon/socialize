@@ -20,11 +20,17 @@ export default function Post({ post }) {
 
   return (
     <Card>
-      <h3>{post.title}</h3>
-      <Link to={`/profile/${user.id}`}>{user.username}</Link>
-      <Link to={`/threads/${thread.id}`}>{thread.name}</Link>
-      {post.image ? <img src={post.image} alt="" /> : null}
-      <p>{post.text}</p>
+      {user && thread ? (
+        <>
+          <h3>{post.title}</h3>
+          <Link to={`/profile/${user.id}`}>{user.username}</Link>
+          <Link to={`/threads/${thread.id}`}>{thread.name}</Link>
+          {post.image ? <img src={post.image} alt="" /> : null}
+          <p>{post.text}</p>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </Card>
   );
 }
