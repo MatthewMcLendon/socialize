@@ -20,7 +20,7 @@ export default function PostForm({ threadId }) {
       text: document.querySelector("#post-text").value,
       image: document.querySelector("#post-image").value,
       user: user.id,
-      thread: threadId,
+      thread: Number(threadId),
       likes: [],
       comments: [],
     };
