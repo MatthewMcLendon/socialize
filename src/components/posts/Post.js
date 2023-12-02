@@ -14,11 +14,13 @@ export default function Post({ post }) {
   }, [users, post]);
 
   return (
-    <Card>
-      <h3>{post.title}</h3>
-      <Link to={`/profile/${user.id}`}>{user.username}</Link>
-      {post.image ? <img src={post.image} alt="" /> : null}
-      <p>{post.text}</p>
-    </Card>
+    <Link to={`/posts/${post.id}`}>
+      <Card>
+        <h3>{post.title}</h3>
+        <Link to={`/profile/${user.id}`}>{user.username}</Link>
+        {post.image ? <img src={post.image} alt="" /> : null}
+        <p>{post.text}</p>
+      </Card>
+    </Link>
   );
 }

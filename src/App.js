@@ -9,6 +9,7 @@ import HomePage from "./components/routes/HomePage";
 import ProfilePage from "./components/routes/ProfilePage";
 import ThreadPage from "./components/routes/ThreadPage";
 import ThreadExplorePage from "./components/routes/ThreadExporePage";
+import PostPage from "./components/routes/PostPage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/profile/:id" element={<ProfilePage />} />
               <Route path="/threads" element={<ThreadExplorePage />} />
               <Route path="/threads/:id" element={<ThreadPage />} />
+              <Route path="/posts/:id" element={<PostPage />} />
             </Routes>
           </PostProvider>
         </ThreadProvider>
