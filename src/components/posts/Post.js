@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../users/UserProvider";
 import { ThreadContext } from "../threads/ThreadProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "../style/card";
 
 export default function Post({ post }) {
@@ -11,6 +11,8 @@ export default function Post({ post }) {
   const [user, setUser] = useState([]);
   const [thread, setThread] = useState({});
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (users && threads) {
       setUser(users.find((user) => user.id === post.user));
@@ -18,15 +20,25 @@ export default function Post({ post }) {
     }
   }, [users, post, threads]);
 
+  const navigationHandler = () => {
+    navigate(`/posts/${post.id}`);
+  };
+
   return (
     <Card>
       {user && thread ? (
         <>
-          <h3>{post.title}</h3>
-          <Link to={`/profile/${user.id}`}>{user.username}</Link>
-          <Link to={`/threads/${thread.id}`}>{thread.name}</Link>
-          {post.image ? <img src={post.image} alt="" /> : null}
-          <p>{post.text}</p>
+          <div className="post-container" onClick={navigationHandler}>
+            <h3>{post.title}</h3>
+            {post.image ? <img src={post.image} alt="" /> : null}
+            <p>{post.text}</p>
+          </div>
+          <div className="post-links">
+            <p>
+              Posted by <Link to={`/profile/${user.id}`}>{user.username}</Link>{" "}
+              in <Link to={`/threads/${thread.id}`}>{thread.name}</Link>
+            </p>
+          </div>
         </>
       ) : (
         <p>Loading...</p>
