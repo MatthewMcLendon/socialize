@@ -25,8 +25,14 @@ export default function PostProvider(props) {
     }).then(getPosts);
   };
 
+  const getPostById = (id) => {
+    return fetch(`http://localhost:8088/posts/${id}`).then((response) =>
+      response.json()
+    );
+  };
+
   return (
-    <PostContext.Provider value={{ posts, addPost }}>
+    <PostContext.Provider value={{ posts, addPost, getPostById }}>
       {props.children}
     </PostContext.Provider>
   );
