@@ -15,6 +15,12 @@ export default function PostProvider(props) {
       .then((response) => setPosts(response));
   };
 
+  const getPostById = (id) => {
+    return fetch(`http://localhost:8088/posts/${id}`).then((response) =>
+      response.json()
+    );
+  };
+
   const addPost = (post) => {
     return fetch("http://localhost:8088/posts", {
       method: "POST",
@@ -25,14 +31,14 @@ export default function PostProvider(props) {
     }).then(getPosts);
   };
 
-  const getPostById = (id) => {
-    return fetch(`http://localhost:8088/posts/${id}`).then((response) =>
-      response.json()
-    );
+  const deletePost = (id) => {
+    return fetch(`http://localhost:8088/posts/${id}`, {
+      method: "DELETE",
+    }).then((response) => response.json());
   };
 
   return (
-    <PostContext.Provider value={{ posts, addPost, getPostById }}>
+    <PostContext.Provider value={{ posts, addPost, getPostById, deletePost }}>
       {props.children}
     </PostContext.Provider>
   );

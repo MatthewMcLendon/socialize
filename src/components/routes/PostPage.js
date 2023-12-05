@@ -4,6 +4,7 @@ import { PostContext } from "../posts/PostProvider";
 import { ThreadContext } from "../threads/ThreadProvider";
 import { useContext, useEffect, useState } from "react";
 import Post from "../posts/Post";
+import PostSettings from "../posts/PostSettings";
 
 export default function PostPage() {
   const [post, setPost] = useState({});
@@ -33,14 +34,15 @@ export default function PostPage() {
     if (user) {
       populateData();
     }
-  }, [user]);
+  }, [user, getPostById, getThreadById, id]);
 
   return (
     <main>
       <h1>PostPage</h1>
       {post ? <Post post={post} /> : <p>Loading...</p>}
-      {isEditable ? <p>Editable</p> : null}
-      {isModerator ? <p>Moderator</p> : null}
+      {isEditable || isModerator ? (
+        <PostSettings isModerator={isModerator} isEditable={isEditable} />
+      ) : null}
     </main>
   );
 }
