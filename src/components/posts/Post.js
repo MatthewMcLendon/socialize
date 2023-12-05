@@ -4,7 +4,7 @@ import { ThreadContext } from "../threads/ThreadProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../style/card";
 
-export default function Post({ post }) {
+export default function Post({ post, setIsEditing, isEditable, isModerator }) {
   const { users } = useContext(UserContext);
   const { threads } = useContext(ThreadContext);
 
@@ -30,6 +30,15 @@ export default function Post({ post }) {
         <>
           <div className="post-container" onClick={navigationHandler}>
             <h3>{post.title}</h3>
+            {isEditable || isModerator ? (
+              <button
+                onClick={() => {
+                  setIsEditing(true);
+                }}
+              >
+                Edit
+              </button>
+            ) : null}
             {post.image ? <img src={post.image} alt="" /> : null}
             <p>{post.text}</p>
           </div>

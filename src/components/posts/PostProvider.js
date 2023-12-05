@@ -34,7 +34,7 @@ export default function PostProvider(props) {
   const deletePost = (id) => {
     return fetch(`http://localhost:8088/posts/${id}`, {
       method: "DELETE",
-    }).then((response) => response.json());
+    }).then(getPosts);
   };
 
   return (

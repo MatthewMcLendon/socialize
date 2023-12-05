@@ -11,12 +11,13 @@ export default function PostPage() {
 
   const [isEditable, setIsEditable] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const { user } = useContext(UserContext);
   const { id } = useParams();
 
   const { getThreadById } = useContext(ThreadContext);
-  const { getPostById } = useContext(PostContext);
+  const { getPostById, deletePost } = useContext(PostContext);
 
   useEffect(() => {
     const populateData = async () => {
@@ -38,11 +39,24 @@ export default function PostPage() {
 
   return (
     <main>
-      <h1>PostPage</h1>
-      {post ? <Post post={post} /> : <p>Loading...</p>}
-      {isEditable || isModerator ? (
-        <PostSettings isModerator={isModerator} isEditable={isEditable} />
-      ) : null}
+      {isEditing ? (
+        <PostSettings
+          post={post}
+          isModerator={isModerator}
+          isEditable={isEditable}
+          deletePost={deletePost}
+          setIsEditing={setIsEditing}
+        />
+      ) : post ? (
+        <Post
+          post={post}
+          setIsEditing={setIsEditing}
+          isEditable={isEditable}
+          isModerator={isModerator}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
     </main>
   );
 }
