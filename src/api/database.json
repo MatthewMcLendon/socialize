@@ -64,8 +64,8 @@
   ],
   "posts": [
     {
-      "title": "Test 1",
-      "text": "This is a test",
+      "title": "Test 1 updated",
+      "text": "updated text",
       "image": "",
       "user": 1,
       "thread": 5,
