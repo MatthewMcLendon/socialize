@@ -57,7 +57,7 @@ export default function PostPage() {
             isEditable={isEditable}
             isModerator={isModerator}
           />
-          <CommentForm />
+          <CommentForm post={post} />
           <CommentList post={post} />
         </>
       ) : (
