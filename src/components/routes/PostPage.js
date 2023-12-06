@@ -5,6 +5,8 @@ import { ThreadContext } from "../threads/ThreadProvider";
 import { useContext, useEffect, useState } from "react";
 import Post from "../posts/Post";
 import PostSettings from "../posts/PostSettings";
+import CommentList from "../comments/CommentList";
+import CommentForm from "../comments/CommentForm";
 
 export default function PostPage() {
   const [post, setPost] = useState({});
@@ -48,12 +50,16 @@ export default function PostPage() {
           setIsEditing={setIsEditing}
         />
       ) : post ? (
-        <Post
-          post={post}
-          setIsEditing={setIsEditing}
-          isEditable={isEditable}
-          isModerator={isModerator}
-        />
+        <>
+          <Post
+            post={post}
+            setIsEditing={setIsEditing}
+            isEditable={isEditable}
+            isModerator={isModerator}
+          />
+          <CommentForm />
+          <CommentList post={post} />
+        </>
       ) : (
         <p>Loading...</p>
       )}
