@@ -2,7 +2,7 @@ import "./ThreadForm.css";
 import { UserContext } from "../users/UserProvider";
 import { ThreadContext } from "./ThreadProvider";
 import { useContext, useState } from "react";
-import Card from "../style/Card";
+import Card from "../style/card";
 
 export default function ThreadForm() {
   const { users, user } = useContext(UserContext);

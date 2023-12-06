@@ -1,13 +1,17 @@
 import "./Thread.css";
 import { useParams } from "react-router-dom";
 import { ThreadContext } from "./ThreadProvider";
+import { PostContext } from "../posts/PostProvider";
 import { UserContext } from "../users/UserProvider";
 import { useContext, useEffect, useState } from "react";
 import ThreadSettings from "./ThreadSettings";
+import PostForm from "../posts/PostForm";
+import PostList from "../posts/PostList";
 
 export default function Thread() {
   const { threads } = useContext(ThreadContext);
   const { user } = useContext(UserContext);
+  const { posts } = useContext(PostContext);
 
   const [isModerator, setIsModerator] = useState(false);
   const [thread, setThread] = useState();
@@ -34,9 +38,15 @@ export default function Thread() {
         <>
           <h2>{thread.name}</h2>
           <p>{thread.description}</p>
+          {isModerator ? <ThreadSettings thread={thread} /> : null}
+          <PostForm threadId={id} />
+          <PostList
+            posts={posts.filter((post) => post.thread === Number(id))}
+          />
         </>
-      ) : null}
-      {isModerator ? <ThreadSettings thread={thread} /> : null}
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }

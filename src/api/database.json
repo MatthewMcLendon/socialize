@@ -51,8 +51,38 @@
         3
       ],
       "id": 5
+    },
+    {
+      "name": "Another Test 2",
+      "description": "Checking if id is saved correctly",
+      "posts": [],
+      "moderators": [
+        1
+      ],
+      "id": 6
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "title": "Test 1 updated",
+      "text": "updated text",
+      "image": "",
+      "user": 1,
+      "thread": 5,
+      "likes": [],
+      "comments": [],
+      "id": 1
+    },
+    {
+      "title": "Test 3",
+      "text": "This is a test\n",
+      "image": "",
+      "user": 1,
+      "thread": 4,
+      "likes": [],
+      "comments": [],
+      "id": 3
+    }
+  ],
   "comments": []
 }
