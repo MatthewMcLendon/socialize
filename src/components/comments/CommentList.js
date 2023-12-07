@@ -7,16 +7,16 @@ export default function CommentList({ post }) {
 
   const [comments, setComments] = useState();
 
-  const getComments = async () => {
-    const commentList = await getCommentsByPostId(post.id);
-    setComments(commentList);
-  };
-
   useEffect(() => {
+    const getComments = async () => {
+      const commentList = await getCommentsByPostId(post.id);
+      setComments(commentList);
+    };
+
     if (post) {
       getComments();
     }
-  }, [post]);
+  }, [post, getCommentsByPostId]);
 
   return (
     <ul>
