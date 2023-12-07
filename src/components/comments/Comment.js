@@ -1,3 +1,3 @@
-export default function Comment(){
-    return <h2>Comment component</h2>
+export default function Comment({ comment }) {
+  return <h2>Comment component</h2>;
 }

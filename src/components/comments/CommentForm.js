@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { UserContext } from "../users/UserProvider";
+import { CommentContext } from "./CommentProvider";
 import Card from "../style/card";
 
 export default function CommentForm({ post }) {
   const { user } = useContext(UserContext);
+  const { addComment } = useContext(CommentContext);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -14,7 +16,7 @@ export default function CommentForm({ post }) {
       text: document.querySelector(".comment-form-text").value,
     };
 
-    console.log("form submit", comment);
+    addComment(comment);
   };
 
   return (

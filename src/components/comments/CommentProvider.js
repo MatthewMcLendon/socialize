@@ -3,7 +3,7 @@ import { createContext } from "react";
 export const CommentContext = createContext();
 
 export default function CommentProvider(props) {
-  const getCommentByPostId = (postId) => {
+  const getCommentsByPostId = (postId) => {
     return fetch(`http://localhost:8088/comments`)
       .then((response) => response.json())
       .then((response) =>
@@ -22,7 +22,7 @@ export default function CommentProvider(props) {
   };
 
   return (
-    <CommentContext.Provider value={{ getCommentByPostId, addComment }}>
+    <CommentContext.Provider value={{ getCommentsByPostId, addComment }}>
       {props.children}
     </CommentContext.Provider>
   );

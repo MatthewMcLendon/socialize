@@ -84,5 +84,18 @@
       "id": 3
     }
   ],
-  "comments": []
+  "comments": [
+    {
+      "user": 1,
+      "post": 3,
+      "text": "test",
+      "id": 1
+    },
+    {
+      "user": 1,
+      "post": 3,
+      "text": "another test",
+      "id": 2
+    }
+  ]
 }
