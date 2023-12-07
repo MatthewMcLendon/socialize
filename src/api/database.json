@@ -79,7 +79,9 @@
       "image": "",
       "user": 1,
       "thread": 4,
-      "likes": [],
+      "likes": [
+        1
+      ],
       "comments": [],
       "id": 3
     }
