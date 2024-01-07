@@ -5,7 +5,7 @@ import Comment from "./Comment";
 export default function CommentList({ post }) {
   const { getCommentsByPostId } = useContext(CommentContext);
 
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const getComments = async () => {

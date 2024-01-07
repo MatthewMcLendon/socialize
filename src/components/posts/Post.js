@@ -12,6 +12,7 @@ export default function Post({ post, setIsEditing, isEditable, isModerator }) {
 
   const [poster, setPoster] = useState([]);
   const [thread, setThread] = useState({});
+  const [likeCount, setLikeCount] = useState(0);
 
   const navigate = useNavigate();
 
@@ -21,9 +22,10 @@ export default function Post({ post, setIsEditing, isEditable, isModerator }) {
   };
 
   useEffect(() => {
-    if (users && threads) {
+    if (users && threads && post.likes) {
       setPoster(users.find((user) => user.id === post.user));
       setThread(threads.find((thread) => thread.id === post.thread));
+      setLikeCount(post.likes.length);
     }
   }, [users, post, threads]);
 
@@ -57,7 +59,8 @@ export default function Post({ post, setIsEditing, isEditable, isModerator }) {
             </p>
           </div>
           <button onClick={likeHandler}>Like!</button>
-          <p>{post.likes.length}</p>
+          {/* <p>Likes: {post.likes.length}</p> */}
+          {console.log(likeCount)}
         </>
       ) : (
         <p>Loading...</p>

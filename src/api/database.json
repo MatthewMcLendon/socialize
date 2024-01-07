@@ -69,7 +69,9 @@
       "image": "",
       "user": 1,
       "thread": 5,
-      "likes": [],
+      "likes": [
+        1
+      ],
       "comments": [],
       "id": 1
     },
@@ -98,6 +100,12 @@
       "post": 3,
       "text": "another test",
       "id": 2
+    },
+    {
+      "user": 1,
+      "post": 1,
+      "text": "This is a comment",
+      "id": 3
     }
   ]
 }
