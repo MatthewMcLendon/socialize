@@ -17,7 +17,12 @@ export default function Post({ post, setIsEditing, isEditable, isModerator }) {
   const navigate = useNavigate();
 
   const likeHandler = () => {
-    post.likes.push(user.id);
+    if(post.likes.includes(user.id)){
+      const newLikes = post.likes.filter((id) => id !== user.id)
+      post.likes = newLikes
+    } else {
+      post.likes.push(user.id);
+    }
     updatePost(post);
   };
 
@@ -59,8 +64,7 @@ export default function Post({ post, setIsEditing, isEditable, isModerator }) {
             </p>
           </div>
           <button onClick={likeHandler}>Like!</button>
-          {/* <p>Likes: {post.likes.length}</p> */}
-          {console.log(likeCount)}
+          <p>Likes: {likeCount}</p>
         </>
       ) : (
         <p>Loading...</p>

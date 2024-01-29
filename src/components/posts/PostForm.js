@@ -42,7 +42,7 @@ export default function PostForm({ threadId }) {
       <input type="text" id="post-title" placeholder="Post title" required />
       <textarea name="" id="post-text" cols="30" rows="10" required></textarea>
       <input type="text" id="post-image" placeholder="Image URL" />
-      <input type="submit" />
+      <input type="submit"/>
     </form>
   );
 

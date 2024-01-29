@@ -86,6 +86,16 @@
       ],
       "comments": [],
       "id": 3
+    },
+    {
+      "title": "Test thread 2 post",
+      "text": "This is a test",
+      "image": "",
+      "user": 1,
+      "thread": 2,
+      "likes": [],
+      "comments": [],
+      "id": 4
     }
   ],
   "comments": [
