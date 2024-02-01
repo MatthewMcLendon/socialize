@@ -37,6 +37,11 @@ export default function CommentProvider(props) {
   };
 
   // delete a comment
+  const deleteComment = (id) => {
+    return fetch(`http://localhost:8088/comments/${id}`, {
+      method: "DELETE",
+    });
+  };
 
   // create provider
   return (
