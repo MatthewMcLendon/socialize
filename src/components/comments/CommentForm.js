@@ -5,7 +5,7 @@ import Card from "../style/card";
 
 // render a form for creating a comment on a post from props, handle the submission
 export default function CommentForm({ post, comment }) {
-  // import current user and post route for comments from contexts
+  // import current user, post, and update route for comments from contexts
   const { user } = useContext(UserContext);
   const { addComment } = useContext(CommentContext);
 
@@ -13,13 +13,18 @@ export default function CommentForm({ post, comment }) {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const comment = {
+    if (comment) {
+      comment.text = document.querySelector(".comment-form-text").value;
+      return;
+    }
+
+    const newComment = {
       user: user.id,
       post: post.id,
       text: document.querySelector(".comment-form-text").value,
     };
 
-    addComment(comment);
+    addComment(newComment);
   };
 
   // render

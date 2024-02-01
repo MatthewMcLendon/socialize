@@ -26,12 +26,23 @@ export default function CommentProvider(props) {
   };
 
   // edit a comment
+  const updateComment = (comment) => {
+    return fetch(`http://localhost:8088/comment/${comment.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
+  };
 
   // delete a comment
 
   // create provider
   return (
-    <CommentContext.Provider value={{ getCommentsByPostId, addComment }}>
+    <CommentContext.Provider
+      value={{ getCommentsByPostId, addComment, updateComment }}
+    >
       {props.children}
     </CommentContext.Provider>
   );
