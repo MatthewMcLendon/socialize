@@ -22,7 +22,7 @@ export default function Comment({ comment }) {
   // render
   return (
     <Card>
-      {user ? <Link to={`/profile/${user.id}`}>{user.username}</Link> : null}
+      <Link to={`/profile/${user.id}`}>{user.username}</Link>
       <p>{comment.text}</p>
     </Card>
   );
