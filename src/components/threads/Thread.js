@@ -40,9 +40,7 @@ export default function Thread() {
           <p>{thread.description}</p>
           {isModerator ? <ThreadSettings thread={thread} /> : null}
           <PostForm threadId={id} />
-          <PostList
-            posts={posts.filter((post) => post.thread === Number(id))}
-          />
+          <PostList posts={posts.filter((post) => post.thread === Number(id))} />
         </>
       ) : (
         <p>Loading...</p>

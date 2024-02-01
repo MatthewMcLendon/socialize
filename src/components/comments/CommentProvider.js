@@ -9,9 +9,7 @@ export default function CommentProvider(props) {
   const getCommentsByPostId = (postId) => {
     return fetch(`http://localhost:8088/comments`)
       .then((response) => response.json())
-      .then((response) =>
-        response.filter((comment) => comment.post === postId)
-      );
+      .then((response) => response.filter((comment) => comment.post === postId));
   };
 
   // add a comment
@@ -46,7 +44,7 @@ export default function CommentProvider(props) {
   // create provider
   return (
     <CommentContext.Provider
-      value={{ getCommentsByPostId, addComment, updateComment }}
+      value={{ getCommentsByPostId, addComment, updateComment, deleteComment }}
     >
       {props.children}
     </CommentContext.Provider>

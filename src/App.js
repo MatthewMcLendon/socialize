@@ -5,12 +5,13 @@ import UserProvider from "./components/users/UserProvider";
 import ThreadProvider from "./components/threads/ThreadProvider";
 import PostProvider from "./components/posts/PostProvider";
 import CommentProvider from "./components/comments/CommentProvider";
-import LoginPage from "./components/routes/LoginPage";
-import HomePage from "./components/routes/HomePage";
-import ProfilePage from "./components/routes/ProfilePage";
-import ThreadPage from "./components/routes/ThreadPage";
-import ThreadExplorePage from "./components/routes/ThreadExporePage";
-import PostPage from "./components/routes/PostPage";
+import LoginPage from "./components/pages/LoginPage";
+import HomePage from "./components/pages/HomePage";
+import ProfilePage from "./components/pages/ProfilePage";
+import ThreadPage from "./components/pages/ThreadPage";
+import ThreadExplorePage from "./components/pages/ThreadExporePage";
+import PostPage from "./components/pages/PostPage";
+import CommentPage from "./components/pages/CommentPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/threads" element={<ThreadExplorePage />} />
                 <Route path="/threads/:id" element={<ThreadPage />} />
                 <Route path="/posts/:id" element={<PostPage />} />
+                <Route path="/comments/:id" element={<CommentPage />} />
               </Routes>
             </CommentProvider>
           </PostProvider>
