@@ -28,7 +28,7 @@ export default function CommentForm({ post }) {
           placeholder="Comment"
           required
         />
-        <input type="submit" />
+        <input type="submit" value={"Post"}/>
       </form>
     </Card>
   );

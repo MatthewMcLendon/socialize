@@ -116,6 +116,24 @@
       "post": 1,
       "text": "This is a comment",
       "id": 3
+    },
+    {
+      "user": 1,
+      "post": 4,
+      "text": "Comment test",
+      "id": 4
+    },
+    {
+      "user": 1,
+      "post": 4,
+      "text": "Comment test",
+      "id": 5
+    },
+    {
+      "user": 1,
+      "post": 4,
+      "text": "Comment test",
+      "id": 6
     }
   ]
 }
