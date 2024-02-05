@@ -2,43 +2,38 @@ import "./Thread.css";
 import { useParams } from "react-router-dom";
 import { ThreadContext } from "./ThreadProvider";
 import { PostContext } from "../posts/PostProvider";
-import { UserContext } from "../users/UserProvider";
-import { useContext, useEffect, useState } from "react";
+import { ModeratorContext } from "../moderators/ModeratorProvider";
 import ThreadSettings from "./ThreadSettings";
 import PostForm from "../posts/PostForm";
 import PostList from "../posts/PostList";
+import { useContext, useEffect } from "react";
 
+// Take the current thread and render it
 export default function Thread() {
-  const { threads } = useContext(ThreadContext);
-  const { user } = useContext(UserContext);
+  // import required info for rendering thread and related posts. Pull id from parameters
+  const { getThreadById, currentThread, setCurrentThread } = useContext(ThreadContext);
   const { posts } = useContext(PostContext);
-
-  const [isModerator, setIsModerator] = useState(false);
-  const [thread, setThread] = useState();
+  const { isModerator } = useContext(ModeratorContext);
 
   const { id } = useParams();
 
+  // set the current thread based on the id parameter
   useEffect(() => {
-    const moderatorCheck = (thread) => {
-      if (thread.moderators.includes(user.id)) {
-        setIsModerator(true);
-      }
+    const getThread = async () => {
+      setCurrentThread(await getThreadById(id));
     };
 
-    if (threads && user) {
-      const loadedThread = threads.find((thread) => thread.id === Number(id));
-      setThread(loadedThread);
-      moderatorCheck(loadedThread);
-    }
-  }, [threads, user, id]);
+    getThread();
+  }, [id]);
 
+  // render
   return (
     <>
-      {thread ? (
+      {currentThread ? (
         <>
-          <h2>{thread.name}</h2>
-          <p>{thread.description}</p>
-          {isModerator ? <ThreadSettings thread={thread} /> : null}
+          <h2>{currentThread.name}</h2>
+          <p>{currentThread.description}</p>
+          {isModerator ? <ThreadSettings thread={currentThread} /> : null}
           <PostForm threadId={id} />
           <PostList posts={posts.filter((post) => post.thread === Number(id))} />
         </>

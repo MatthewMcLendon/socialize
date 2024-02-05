@@ -12,6 +12,7 @@ import ThreadPage from "./components/pages/ThreadPage";
 import ThreadExplorePage from "./components/pages/ThreadExporePage";
 import PostPage from "./components/pages/PostPage";
 import CommentPage from "./components/pages/CommentPage";
+import ModeratorProvider from "./components/moderators/ModeratorProvider";
 
 function App() {
   return (
@@ -20,16 +21,18 @@ function App() {
         <ThreadProvider>
           <PostProvider>
             <CommentProvider>
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/profile/:id" element={<ProfilePage />} />
-                <Route path="/threads" element={<ThreadExplorePage />} />
-                <Route path="/threads/:id" element={<ThreadPage />} />
-                <Route path="/posts/:id" element={<PostPage />} />
-                <Route path="/comments/:id" element={<CommentPage />} />
-              </Routes>
+              <ModeratorProvider>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/profile/:id" element={<ProfilePage />} />
+                  <Route path="/threads" element={<ThreadExplorePage />} />
+                  <Route path="/threads/:id" element={<ThreadPage />} />
+                  <Route path="/posts/:id" element={<PostPage />} />
+                  <Route path="/comments/:id" element={<CommentPage />} />
+                </Routes>
+              </ModeratorProvider>
             </CommentProvider>
           </PostProvider>
         </ThreadProvider>

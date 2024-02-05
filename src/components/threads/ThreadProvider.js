@@ -7,6 +7,7 @@ export const ThreadContext = createContext();
 export default function ThreadProvider(props) {
   // create state for storing all threads
   const [threads, setThreads] = useState();
+  const [currentThread, setCurrentThread] = useState();
 
   // sync to db
   useEffect(() => {
@@ -59,10 +60,12 @@ export default function ThreadProvider(props) {
     <ThreadContext.Provider
       value={{
         threads,
+        currentThread,
         addThread,
         deleteThread,
         updateThread,
         getThreadById,
+        setCurrentThread,
       }}
     >
       {props.children}

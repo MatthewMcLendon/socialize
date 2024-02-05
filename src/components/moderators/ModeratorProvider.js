@@ -1,49 +1,36 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ThreadContext } from "../threads/ThreadProvider";
 import { UserContext } from "../users/UserProvider";
-import { PostContext } from "../posts/PostProvider";
 
 // create context
 export const ModeratorContext = createContext();
 
-// provide other components with moderator data
+// let other components know if the logged in user is a moderator for the content
 export default function ModeratorProvider(props) {
   // import data for checking if the current user is a moderator
-
   const { user } = useContext(UserContext);
-  const { getThreadById } = useContext(ThreadContext);
-  const { getPostById } = useContext(PostContext);
+  const { currentThread } = useContext(ThreadContext);
 
-  // check if current user is a moderator of a thread
-  const moderatorCheck = async (input) => {
-    // common functionality to all types
-    const check = (thread) => {
-      if (thread.moderators.includes(user.id)) {
-        return true;
-      } else {
-        return false;
+  // create state to be passed to other components
+  const [isModerator, setIsModerator] = useState(false);
+
+  // update isModerator state when the current user or current thread changes
+  useEffect(() => {
+    // check if current user is a moderator of the current thread and set isModerator state
+    const moderatorCheck = () => {
+      if (currentThread) {
+        currentThread.moderators.includes(user.id) ? setIsModerator(true) : setIsModerator(false);
       }
     };
 
-    // check for given input type if current user is moderator. input format = {data: query, type: "typeName"}
-    switch (input) {
-      case (input.type = "thread"):
-        return check(input.data);
-      case (input.type = "post"):
-        const currentThread = await getThreadById(input.data.thread);
-        return check(currentThread);
-      case (input.type = "comment"):
-        const currentPost = await getPostById(input.data.post);
-        return check(await getThreadById(currentPost.thread));
-      default:
-        return false;
-    }
-  };
+    moderatorCheck();
+  }, [user, currentThread]);
 
   // create provider
   return (
-    <ModeratorContext.Provider value={{ moderatorCheck }}>
-      {props.children}
-    </ModeratorContext.Provider>
+    <ModeratorContext.Provider value={{ isModerator }}>{props.children}</ModeratorContext.Provider>
   );
 }
+
+// Continue here: need to test this code and hook it up to the CommentForm. Finish CommentForm and rework other components for new ModProvider.
+// Add comments to all components.
