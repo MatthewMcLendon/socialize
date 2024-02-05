@@ -23,7 +23,9 @@ export default function ThreadProvider(props) {
 
   // get by Id route
   const getThreadById = (id) => {
-    return fetch(`http://localhost:8088/threads/${id}`).then((response) => response.json());
+    return fetch(`http://localhost:8088/threads/${id}`)
+      .then((response) => response.json())
+      .then((response) => setCurrentThread(response));
   };
 
   // post route
@@ -65,7 +67,6 @@ export default function ThreadProvider(props) {
         deleteThread,
         updateThread,
         getThreadById,
-        setCurrentThread,
       }}
     >
       {props.children}

@@ -31,6 +31,3 @@ export default function ModeratorProvider(props) {
     <ModeratorContext.Provider value={{ isModerator }}>{props.children}</ModeratorContext.Provider>
   );
 }
-
-// Continue here: need to test this code and hook it up to the CommentForm. Finish CommentForm and rework other components for new ModProvider.
-// Add comments to all components.

@@ -1,24 +1,32 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
+import { ThreadContext } from "../threads/ThreadProvider";
 
 export const PostContext = createContext();
 
 export default function PostProvider(props) {
+  const { currentThread } = useContext(ThreadContext);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getPosts();
-  }, []);
+    if (currentThread) {
+      getPostsByThreadId(currentThread.id);
+    }
+  }, [currentThread]);
 
-  const getPosts = () => {
-    return fetch("http://localhost:8088/posts")
+  // const getPosts = () => {
+  //   return fetch("http://localhost:8088/posts")
+  //     .then((response) => response.json())
+  //     .then((response) => setPosts(response));
+  // };
+
+  const getPostsByThreadId = (threadId) => {
+    return fetch(`http://localhost:8088/posts?thread=${threadId}`)
       .then((response) => response.json())
       .then((response) => setPosts(response));
   };
 
   const getPostById = (id) => {
-    return fetch(`http://localhost:8088/posts/${id}`).then((response) =>
-      response.json()
-    );
+    return fetch(`http://localhost:8088/posts/${id}`).then((response) => response.json());
   };
 
   const addPost = (post) => {
@@ -28,13 +36,13 @@ export default function PostProvider(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(post),
-    }).then(getPosts);
+    }); //.then(getPosts);
   };
 
   const deletePost = (id) => {
     return fetch(`http://localhost:8088/posts/${id}`, {
       method: "DELETE",
-    }).then(getPosts);
+    }); //.then(getPosts);
   };
 
   const updatePost = (post) => {
@@ -44,12 +52,12 @@ export default function PostProvider(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(post),
-    }).then(getPosts);
+    }); //.then(getPosts);
   };
 
   return (
     <PostContext.Provider
-      value={{ posts, addPost, getPostById, deletePost, updatePost }}
+      value={{ posts, setPosts, addPost, getPostById, getPostsByThreadId, deletePost, updatePost }}
     >
       {props.children}
     </PostContext.Provider>

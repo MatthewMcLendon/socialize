@@ -11,7 +11,7 @@ import { useContext, useEffect } from "react";
 // Take the current thread and render it
 export default function Thread() {
   // import required info for rendering thread and related posts. Pull id from parameters
-  const { getThreadById, currentThread, setCurrentThread } = useContext(ThreadContext);
+  const { getThreadById, currentThread } = useContext(ThreadContext);
   const { posts } = useContext(PostContext);
   const { isModerator } = useContext(ModeratorContext);
 
@@ -19,11 +19,11 @@ export default function Thread() {
 
   // set the current thread based on the id parameter
   useEffect(() => {
-    const getThread = async () => {
-      setCurrentThread(await getThreadById(id));
+    const getData = async () => {
+      await getThreadById(id);
     };
 
-    getThread();
+    getData();
   }, [id]);
 
   // render
@@ -35,7 +35,7 @@ export default function Thread() {
           <p>{currentThread.description}</p>
           {isModerator ? <ThreadSettings thread={currentThread} /> : null}
           <PostForm threadId={id} />
-          <PostList posts={posts.filter((post) => post.thread === Number(id))} />
+          <PostList posts={posts} />
         </>
       ) : (
         <p>Loading...</p>
