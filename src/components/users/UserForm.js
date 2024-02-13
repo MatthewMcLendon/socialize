@@ -7,7 +7,7 @@ import Card from "../style/card";
 // for for loging users in and registering new users
 export default function UserForm() {
   // import user functions and all users
-  const { addUser, logInUser, users } = useContext(UserContext);
+  const { addUser, logInUser, getUserByName } = useContext(UserContext);
 
   // states for determining between loging in and sign up, Error message
   const [isSignup, setIsSignup] = useState(false);
@@ -17,7 +17,7 @@ export default function UserForm() {
   const navigate = useNavigate();
 
   // logic for login / signup
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     // prevent submission and get info from form
     event.preventDefault();
     const formData = getFormData();
@@ -25,12 +25,12 @@ export default function UserForm() {
     // for signing up a new user
     if (isSignup) {
       // check if submitted email is in use
-      if (duplicateEmailCheck(formData, users)) {
+      if (duplicateEmailCheck(formData)) {
         setErrorMessage("Email already in use.");
         return;
       }
       // check if username is in use
-      if (duplicateUserCheck(formData, users)) {
+      if (duplicateUserCheck(formData)) {
         setErrorMessage("Username taken. Please select another.");
         return;
       }
@@ -43,10 +43,10 @@ export default function UserForm() {
 
     // for logging in an existing user
     // find existing user for provided username and password
-    let user = users.find(
-      (existingUser) =>
-        existingUser.username === formData.username && existingUser.password === formData.password
-    );
+    let user = await getUserByName(formData.username);
+    if (user.password !== formData.password) {
+      user = null;
+    }
 
     // log in user, clear the form, navigate home
     if (user) {

@@ -85,9 +85,16 @@ export default function UserProvider(props) {
 
   // get route for specific user by username
   const getUserByName = (name) => {
-    return fetch(`http://localhost:8088/users?username=${name}`).then((response) =>
-      response.json()
-    );
+    return fetch(`http://localhost:8088/users?username=${name}`)
+      .then((response) => response.json())
+      .then((response) => (response = response[0]));
+  };
+
+  // get route for specific user by email
+  const getUserByEmail = (email) => {
+    return fetch(`http://localhost:8088/users?email=${email}`)
+      .then((response) => response.json())
+      .then((response) => (response = response[0]));
   };
 
   // create provider and pass states / functions
@@ -103,6 +110,7 @@ export default function UserProvider(props) {
         updateUser,
         getUserById,
         getUserByName,
+        getUserByEmail,
       }}
     >
       {props.children}
