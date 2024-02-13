@@ -11,6 +11,30 @@
       "password": "test",
       "email": "test@gmail.com",
       "id": 3
+    },
+    {
+      "username": "test4",
+      "password": "test",
+      "email": "test@test.net",
+      "id": 4
+    },
+    {
+      "username": "bunkus",
+      "password": "test",
+      "email": "bunkus@bunkus.net",
+      "id": 5
+    },
+    {
+      "username": "test5",
+      "password": "test",
+      "email": "test@test5.com",
+      "id": 6
+    },
+    {
+      "username": "test6",
+      "password": "test",
+      "email": "test6@test.com",
+      "id": 7
     }
   ],
   "threads": [

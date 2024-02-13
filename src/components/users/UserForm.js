@@ -7,7 +7,7 @@ import Card from "../style/card";
 // for for loging users in and registering new users
 export default function UserForm() {
   // import user functions and all users
-  const { addUser, logInUser, getUserByName } = useContext(UserContext);
+  const { addUser, logInUser, getUserByName, getUserByEmail } = useContext(UserContext);
 
   // states for determining between loging in and sign up, Error message
   const [isSignup, setIsSignup] = useState(false);
@@ -25,33 +25,34 @@ export default function UserForm() {
     // for signing up a new user
     if (isSignup) {
       // check if submitted email is in use
-      if (duplicateEmailCheck(formData)) {
+      if (await duplicateEmailCheck(formData.email)) {
         setErrorMessage("Email already in use.");
         return;
       }
       // check if username is in use
-      if (duplicateUserCheck(formData)) {
+      if (await duplicateUserCheck(formData.username)) {
         setErrorMessage("Username taken. Please select another.");
         return;
       }
       // create new user, navigate home
       else {
-        addUser(formData).then(clearFormData).then(navigate("/"));
+        addUser(formData).then(navigate("/"));
         return;
       }
     }
 
     // for logging in an existing user
+
     // find existing user for provided username and password
     let user = await getUserByName(formData.username);
-    if (user.password !== formData.password) {
+    if (user && user.password !== formData.password) {
       user = null;
     }
 
     // log in user, clear the form, navigate home
     if (user) {
       logInUser(user);
-      clearFormData();
+      // clearFormData();
       navigate("/");
     }
     // otherwise set error message
@@ -71,29 +72,25 @@ export default function UserForm() {
   };
 
   // check if form email exists in database
-  const duplicateEmailCheck = (user, users) => {
-    let check;
+  const duplicateEmailCheck = async (email) => {
+    let check = await getUserByEmail(email);
 
-    if (users.find((existingUser) => existingUser.email === user.email)) {
-      check = true;
+    if (check) {
+      return true;
     } else {
-      check = false;
+      return false;
     }
-
-    return check;
   };
 
   // check if form user exists in database
-  const duplicateUserCheck = (user, users) => {
-    let check;
+  const duplicateUserCheck = async (username) => {
+    let check = await getUserByName(username);
 
-    if (users.find((existingUser) => existingUser.username === user.username)) {
-      check = true;
+    if (check) {
+      return true;
     } else {
-      check = false;
+      return false;
     }
-
-    return check;
   };
 
   // collect the data from the form and prepare it for signup or login
@@ -113,21 +110,6 @@ export default function UserForm() {
       password: document.querySelector("#password").value,
       email: email,
     };
-  };
-
-  // clear the form
-  const clearFormData = () => {
-    document.querySelector("#username").value = "";
-    document.querySelector("#password").value = "";
-
-    // email only visible for the signup form, clear only if it exists
-    if (isSignup) {
-      document.querySelector("#email").value = "";
-    }
-
-    // reset states to default values
-    setIsSignup(false);
-    setErrorMessage();
   };
 
   // render
